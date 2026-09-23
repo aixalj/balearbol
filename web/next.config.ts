@@ -3,7 +3,8 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: path.join(__dirname),
+    // Git repo root (parent of web/) — where Turbopack resolves CSS deps
+    root: path.resolve(__dirname, ".."),
   },
 };
 
