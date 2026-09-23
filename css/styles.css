@@ -402,16 +402,17 @@ body.is-menu-open {
 
 /* —— Services —— */
 .services {
-  background: var(--brand-white);
-  padding: 96px 32px;
+  background: #ffffff;
+  padding: 64px 24px 80px;
 }
 
 .services__inner {
-  max-width: var(--content-max);
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 40px;
 }
 
 .services__header {
@@ -429,24 +430,33 @@ body.is-menu-open {
   line-height: 40px;
   letter-spacing: -1.8px;
   text-transform: uppercase;
-  color: var(--brand-black);
+  color: #1e1d22;
 }
 
 .services__rule {
   width: 96px;
   height: 4px;
-  background: var(--brand-green);
+  background: #c1cc6c;
 }
 
 .services__grid {
   display: grid;
   gap: 24px;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hazard"
+    "gear"
+    "pruning"
+    "rigging";
 }
 
 .service-card {
   position: relative;
+  z-index: 0;
   overflow: hidden;
-  min-height: 300px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .service-card__body {
@@ -454,7 +464,6 @@ body.is-menu-open {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .service-card__title {
@@ -472,14 +481,14 @@ body.is-menu-open {
 }
 
 .service-card__cta {
-  padding-top: 8px;
+  margin-top: 8px;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: var(--brand-green);
+  color: #c1cc6c;
 }
 
 .service-card__cta:hover {
@@ -487,37 +496,39 @@ body.is-menu-open {
 }
 
 .service-card__icon {
+  display: block;
   width: 33px;
-  height: auto;
-  margin-bottom: 8px;
+  height: 29px;
+  margin: 0 0 24px;
 }
 
 .service-card__watermark {
   position: absolute;
   top: 0;
   right: 0;
-  width: 154px;
-  height: 164px;
+  width: 120px;
+  height: auto;
   pointer-events: none;
+  z-index: 0;
 }
 
 .service-card__photo {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: cover;
-  opacity: 0.14;
-  z-index: 0;
+  opacity: 0.12;
 }
 
 .service-card__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 0;
-  padding: 8px 0 0;
+  margin: 8px 0 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -531,25 +542,30 @@ body.is-menu-open {
   line-height: 15px;
   letter-spacing: -0.5px;
   text-transform: uppercase;
-  color: var(--brand-black);
+  color: #1e1d22;
 }
 
 .service-card__tags img {
   width: 10px;
   height: 10px;
+  flex-shrink: 0;
 }
 
-/* Mobile card order matches Figma: hazard → gear → pruning → rigging */
+/* Mobile cards — Figma 16:24 order */
 .service-card--hazard {
-  order: 1;
+  grid-area: hazard;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 136px;
-  background: var(--brand-black);
-  border-top: 8px solid var(--brand-green);
-  color: var(--brand-white);
-  padding: 40px 32px 32px;
+  background: #1e1d22;
+  border-top: 8px solid #c1cc6c;
+  color: #ffffff;
+  padding: 32px 24px;
+  min-height: 280px;
+}
+
+.service-card--hazard .service-card__body {
+  gap: 16px;
+  margin-top: auto;
 }
 
 .service-card--hazard .service-card__title {
@@ -563,17 +579,16 @@ body.is-menu-open {
 }
 
 .service-card--gear {
-  order: 2;
+  grid-area: gear;
   display: flex;
   flex-direction: column;
-  background: var(--brand-green);
-  color: var(--brand-black);
-  min-height: 350px;
+  background: #c1cc6c;
+  color: #1e1d22;
 }
 
 .service-card--gear .service-card__body {
   gap: 8px;
-  padding: 32px;
+  padding: 28px 24px;
 }
 
 .service-card--gear .service-card__title {
@@ -587,11 +602,13 @@ body.is-menu-open {
 }
 
 .service-card--gear .service-card__media {
-  flex: 1;
-  min-height: 180px;
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0;
 }
 
 .service-card--gear .service-card__media img {
+  display: block;
   width: 100%;
   height: 100%;
   max-width: none;
@@ -599,45 +616,40 @@ body.is-menu-open {
 }
 
 .service-card--pruning {
-  order: 3;
+  grid-area: pruning;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: var(--brand-green);
-  border-left: 4px solid var(--brand-black);
-  color: var(--brand-black);
-  min-height: 400px;
-  padding: 32px 32px 32px 36px;
-}
-
-.service-card--pruning .service-card__title {
-  font-size: 30px;
-  line-height: 36px;
-}
-
-.service-card--pruning .service-card__text {
-  max-width: 28rem;
-  font-size: 16px;
-  line-height: 24px;
+  background: #c1cc6c;
+  border-left: 4px solid #1e1d22;
+  color: #1e1d22;
+  min-height: 320px;
+  padding: 28px 24px 28px 28px;
 }
 
 .service-card--pruning .service-card__body {
-  gap: 0;
+  gap: 16px;
 }
 
 .service-card--pruning .service-card__title {
-  margin-bottom: 16px;
+  font-size: 28px;
+  line-height: 34px;
 }
 
 .service-card--pruning .service-card__text {
-  padding-bottom: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  max-width: 36rem;
 }
 
 .service-card--rigging {
-  order: 4;
-  background: rgba(30, 29, 34, 0.12);
-  color: var(--brand-black);
-  padding: 32px;
+  grid-area: rigging;
+  display: flex;
+  flex-direction: column;
+  background: rgba(30, 29, 34, 0.14);
+  color: #1e1d22;
+  min-height: 240px;
+  padding: 28px 24px;
 }
 
 .service-card--rigging .service-card__body {
@@ -654,54 +666,77 @@ body.is-menu-open {
   line-height: 20px;
 }
 
-@media (min-width: 900px) {
+/* Desktop bento — Figma 1:23 */
+@media (min-width: 960px) {
+  .services {
+    padding: 96px 32px;
+  }
+
+  .services__inner {
+    gap: 64px;
+  }
+
   .services__grid {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: 400px 350px;
+    grid-template-areas:
+      "pruning pruning pruning pruning pruning pruning pruning pruning hazard hazard hazard hazard"
+      "rigging rigging rigging rigging rigging gear gear gear gear gear gear gear";
   }
 
   .service-card--pruning {
-    order: 0;
-    grid-column: 1 / span 8;
-    grid-row: 1;
+    min-height: 0;
+    height: 100%;
+    padding: 32px 32px 32px 36px;
+  }
+
+  .service-card--pruning .service-card__title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .service-card--pruning .service-card__watermark {
+    width: 154px;
   }
 
   .service-card--hazard {
-    order: 0;
-    grid-column: 9 / span 4;
-    grid-row: 1;
-    align-self: stretch;
+    min-height: 0;
+    height: 100%;
+    padding: 40px 32px 32px;
+    justify-content: space-between;
+  }
+
+  .service-card--hazard .service-card__body {
+    margin-top: 0;
+  }
+
+  .service-card--hazard .service-card__icon {
+    margin-bottom: 0;
   }
 
   .service-card--rigging {
-    order: 0;
-    grid-column: 1 / span 5;
-    grid-row: 2;
+    min-height: 0;
+    height: 100%;
+    padding: 32px;
   }
 
   .service-card--gear {
-    order: 0;
-    grid-column: 6 / span 7;
-    grid-row: 2;
     flex-direction: row;
     align-items: stretch;
     min-height: 0;
     height: 100%;
   }
 
-  .service-card--gear .service-card__body,
-  .service-card--gear .service-card__media {
-    flex: 1;
-    min-width: 0;
-  }
-
   .service-card--gear .service-card__body {
-    display: flex;
-    flex-direction: column;
+    flex: 1 1 50%;
     justify-content: center;
+    padding: 32px;
   }
 
   .service-card--gear .service-card__media {
+    flex: 1 1 50%;
+    width: auto;
+    height: auto;
     min-height: 0;
   }
 }
