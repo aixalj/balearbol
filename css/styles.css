@@ -399,3 +399,309 @@ body.is-menu-open {
     line-height: 72px;
   }
 }
+
+/* —— Services —— */
+.services {
+  background: var(--brand-white);
+  padding: 96px 32px;
+}
+
+.services__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.services__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.services__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -1.8px;
+  text-transform: uppercase;
+  color: var(--brand-black);
+}
+
+.services__rule {
+  width: 96px;
+  height: 4px;
+  background: var(--brand-green);
+}
+
+.services__grid {
+  display: grid;
+  gap: 24px;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.service-card__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: inherit;
+}
+
+.service-card__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: inherit;
+}
+
+.service-card__cta {
+  padding-top: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--brand-green);
+}
+
+.service-card__cta:hover {
+  opacity: 0.85;
+}
+
+.service-card__icon {
+  width: 33px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.service-card__watermark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 154px;
+  height: 164px;
+  pointer-events: none;
+}
+
+.service-card__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0.14;
+  z-index: 0;
+}
+
+.service-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 8px 0 0;
+  list-style: none;
+}
+
+.service-card__tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: var(--brand-black);
+}
+
+.service-card__tags img {
+  width: 10px;
+  height: 10px;
+}
+
+/* Mobile card order matches Figma: hazard → gear → pruning → rigging */
+.service-card--hazard {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 136px;
+  background: var(--brand-black);
+  border-top: 8px solid var(--brand-green);
+  color: var(--brand-white);
+  padding: 40px 32px 32px;
+}
+
+.service-card--hazard .service-card__title {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.service-card--hazard .service-card__text {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.service-card--gear {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  background: var(--brand-green);
+  color: var(--brand-black);
+  min-height: 350px;
+}
+
+.service-card--gear .service-card__body {
+  gap: 8px;
+  padding: 32px;
+}
+
+.service-card--gear .service-card__title {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.service-card--gear .service-card__text {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.service-card--gear .service-card__media {
+  flex: 1;
+  min-height: 180px;
+}
+
+.service-card--gear .service-card__media img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.service-card--pruning {
+  order: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--brand-green);
+  border-left: 4px solid var(--brand-black);
+  color: var(--brand-black);
+  min-height: 400px;
+  padding: 32px 32px 32px 36px;
+}
+
+.service-card--pruning .service-card__title {
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.service-card--pruning .service-card__text {
+  max-width: 28rem;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.service-card--pruning .service-card__body {
+  gap: 0;
+}
+
+.service-card--pruning .service-card__title {
+  margin-bottom: 16px;
+}
+
+.service-card--pruning .service-card__text {
+  padding-bottom: 24px;
+}
+
+.service-card--rigging {
+  order: 4;
+  background: rgba(30, 29, 34, 0.12);
+  color: var(--brand-black);
+  padding: 32px;
+}
+
+.service-card--rigging .service-card__body {
+  gap: 8px;
+}
+
+.service-card--rigging .service-card__title {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.service-card--rigging .service-card__text {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (min-width: 900px) {
+  .services__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 400px 350px;
+  }
+
+  .service-card--pruning {
+    order: 0;
+    grid-column: 1 / span 8;
+    grid-row: 1;
+  }
+
+  .service-card--hazard {
+    order: 0;
+    grid-column: 9 / span 4;
+    grid-row: 1;
+    align-self: stretch;
+  }
+
+  .service-card--rigging {
+    order: 0;
+    grid-column: 1 / span 5;
+    grid-row: 2;
+  }
+
+  .service-card--gear {
+    order: 0;
+    grid-column: 6 / span 7;
+    grid-row: 2;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .service-card--gear .service-card__body,
+  .service-card--gear .service-card__media {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .service-card--gear .service-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .service-card--gear .service-card__media {
+    min-height: 0;
+  }
+}
