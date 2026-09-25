@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=5" />
+    <link rel="stylesheet" href="css/styles.css?v=6" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -55,8 +55,116 @@
       </div>
     </header>
 
-    <main class="page">
-      <h1 class="page__title">Gallery</h1>
+    <main class="gallery-page">
+      <section class="gallery-hero" aria-labelledby="gallery-heading">
+        <div class="gallery-hero__inner">
+          <h1 class="gallery-hero__title" id="gallery-heading">Gallery</h1>
+          <div class="gallery-hero__intro">
+            <p>
+              Explore our portfolio of complex tree removals and precision
+              pruning. Each frame represents a calculated series of cuts and
+              controlled descents.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-label="Project gallery">
+        <div class="gallery-section__inner">
+          <div class="gallery-grid" data-gallery-track>
+            <article class="gallery-card gallery-card--feature">
+              <img
+                class="gallery-card__image"
+                src="assets/gallery/feature.jpg"
+                alt="Arborist performing a controlled old-growth extraction"
+                width="1600"
+                height="1200"
+                loading="eager"
+              />
+              <div class="gallery-card__caption">
+                <p class="gallery-card__eyebrow">Complex Removal</p>
+                <h2 class="gallery-card__title">
+                  Old Growth Douglas Fir Extraction
+                </h2>
+              </div>
+            </article>
+
+            <article class="gallery-card gallery-card--equip">
+              <img
+                class="gallery-card__image"
+                src="assets/gallery/equipment.jpg"
+                alt="Arborist chainsaws and climbing gear"
+                width="800"
+                height="600"
+                loading="lazy"
+              />
+              <div class="gallery-card__overlay" aria-hidden="true">
+                <img
+                  src="assets/icons/expand.svg"
+                  alt=""
+                  width="36"
+                  height="36"
+                />
+              </div>
+            </article>
+
+            <article class="gallery-card gallery-card--prune">
+              <img
+                class="gallery-card__image"
+                src="assets/gallery/pruning.jpg"
+                alt="Fine pruning results in the canopy"
+                width="800"
+                height="600"
+                loading="lazy"
+              />
+            </article>
+
+            <article class="gallery-card gallery-card--canopy">
+              <img
+                class="gallery-card__image"
+                src="assets/gallery/canopy.jpg"
+                alt="Forest canopy light during a rigging operation"
+                width="1000"
+                height="900"
+                loading="lazy"
+              />
+            </article>
+
+            <div class="gallery-card gallery-card--cluster">
+              <article class="gallery-card gallery-card--tech">
+                <img
+                  class="gallery-card__image"
+                  src="assets/gallery/technical.jpg"
+                  alt="Technical rigging system detail"
+                  width="700"
+                  height="450"
+                  loading="lazy"
+                />
+              </article>
+              <article class="gallery-card gallery-card--finish">
+                <img
+                  class="gallery-card__image"
+                  src="assets/gallery/finish.jpg"
+                  alt="Clean site finish after removal"
+                  width="700"
+                  height="450"
+                  loading="lazy"
+                />
+              </article>
+              <article class="gallery-card gallery-card--forest">
+                <img
+                  class="gallery-card__image"
+                  src="assets/gallery/forest.jpg"
+                  alt="Forest management work"
+                  width="1400"
+                  height="450"
+                  loading="lazy"
+                />
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
 

@@ -1174,3 +1174,248 @@ body.is-menu-open {
     align-items: start;
   }
 }
+
+/* —— Gallery page —— */
+.gallery-page {
+  flex: 1;
+  width: 100%;
+}
+
+.gallery-hero {
+  padding: 48px 24px 32px;
+}
+
+.gallery-hero__inner {
+  width: 100%;
+  max-width: 1216px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gallery-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--brand-black);
+}
+
+.gallery-hero__intro {
+  border-left: 4px solid var(--brand-green);
+  padding-left: 22px;
+  max-width: 28rem;
+}
+
+.gallery-hero__intro p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  color: var(--brand-black);
+}
+
+.gallery-section {
+  padding: 0 0 64px;
+}
+
+.gallery-section__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gallery-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 24px;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  margin-inline: -24px;
+  padding-inline: 24px;
+}
+
+.gallery-grid::-webkit-scrollbar {
+  height: 4px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb {
+  background: rgba(30, 29, 34, 0.25);
+  border-radius: 2px;
+}
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 82%;
+  height: 360px;
+  scroll-snap-align: start;
+  background: #1e1d22;
+}
+
+.gallery-card--cluster {
+  display: contents;
+}
+
+.gallery-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-card__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 29, 34, 0) 0%,
+    rgba(30, 29, 34, 0.85) 100%
+  );
+  color: #ffffff;
+}
+
+.gallery-card__eyebrow {
+  margin: 0 0 4px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #c1cc6c;
+}
+
+.gallery-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.gallery-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 29, 34, 0.35);
+  pointer-events: none;
+}
+
+.gallery-card--feature {
+  height: 420px;
+}
+
+@media (min-width: 900px) {
+  .gallery-hero {
+    padding: 128px 32px 96px;
+  }
+
+  .gallery-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .gallery-hero__title {
+    font-size: 56px;
+    line-height: 65px;
+  }
+
+  .gallery-hero__intro {
+    max-width: 448px;
+    justify-self: end;
+  }
+
+  .gallery-section {
+    padding: 0 32px 96px;
+  }
+
+  .gallery-section__inner {
+    padding: 0;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 288px 288px 450px;
+    gap: 24px;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+
+  .gallery-card {
+    flex: none;
+    width: auto;
+    height: auto;
+    scroll-snap-align: none;
+  }
+
+  .gallery-card--feature {
+    grid-column: 1 / span 8;
+    grid-row: 1 / span 2;
+    height: auto;
+    min-height: 0;
+  }
+
+  .gallery-card--equip {
+    grid-column: 9 / span 4;
+    grid-row: 1;
+  }
+
+  .gallery-card--prune {
+    grid-column: 9 / span 4;
+    grid-row: 2;
+  }
+
+  .gallery-card--canopy {
+    grid-column: 1 / span 5;
+    grid-row: 3;
+  }
+
+  .gallery-card--cluster {
+    display: grid;
+    grid-column: 6 / span 7;
+    grid-row: 3;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    height: auto;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .gallery-card--tech {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .gallery-card--finish {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .gallery-card--forest {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .gallery-card__title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
