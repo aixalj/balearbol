@@ -370,6 +370,241 @@ button {
   }
 }
 
+/* —— About certifications —— */
+.about-certs {
+  background: #f6faf2;
+  padding: 80px 24px;
+}
+
+.about-certs__inner {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: var(--content-max);
+}
+
+.about-certs__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.about-certs__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 672px;
+}
+
+.about-certs__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--brand-black);
+}
+
+.about-certs__text {
+  margin: 0;
+  color: var(--brand-black);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.about-certs__protocol {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--brand-green);
+  color: var(--brand-black);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-certs__protocol img {
+  flex-shrink: 0;
+  width: 24px;
+  height: 30px;
+}
+
+.about-certs__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 40px 32px;
+}
+
+.cert-card--feature {
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 360px;
+  background: var(--brand-green);
+  padding: 40px;
+}
+
+.cert-card--dark,
+.cert-card--accent {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 320px;
+}
+
+.cert-card--dark {
+  background: var(--brand-black);
+}
+
+.cert-card--accent {
+  background: var(--brand-green);
+}
+
+.cert-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.cert-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  background: var(--brand-black);
+}
+
+.cert-card__glyph {
+  margin-bottom: 24px;
+  width: auto;
+  height: auto;
+}
+
+.cert-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #173124;
+}
+
+.cert-card--dark .cert-card__title {
+  margin-bottom: 12px;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--brand-green);
+}
+
+.cert-card--accent .cert-card__title {
+  margin-bottom: 12px;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.cert-card__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #424844;
+}
+
+.cert-card--dark .cert-card__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--brand-white);
+}
+
+.cert-card--accent .cert-card__text {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.cert-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 33px;
+  border-top: 1px solid rgba(194, 200, 194, 0.3);
+}
+
+.cert-card__code {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #645d58;
+}
+
+.cert-card__arrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 900px) {
+  .about-certs {
+    padding: 128px 32px;
+  }
+
+  .about-certs__inner {
+    gap: 80px;
+  }
+
+  .about-certs__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .about-certs__protocol {
+    flex-shrink: 0;
+  }
+
+  .about-certs__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: 391px;
+  }
+
+  .cert-card--feature {
+    grid-column: 1 / span 2;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .cert-card--dark,
+  .cert-card--accent {
+    min-height: 0;
+    height: 100%;
+    padding: 32px;
+  }
+}
+
 body.is-menu-open {
   overflow: hidden;
 }
