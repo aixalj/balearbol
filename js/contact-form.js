@@ -10,9 +10,12 @@
   const statusEl = form.querySelector("[data-form-status]");
   const submitBtn = form.querySelector("[data-submit]");
   const submitLabel = form.querySelector("[data-submit-label]");
+  const turnstileEl = document.getElementById("turnstile-widget");
 
   /** @type {File[]} */
   let selectedFiles = [];
+  /** @type {string|null} */
+  let turnstileWidgetId = null;
 
   const setStatus = (message, type) => {
     if (!statusEl) return;
@@ -20,6 +23,48 @@
     statusEl.textContent = message || "";
     statusEl.classList.toggle("is-error", type === "error");
     statusEl.classList.toggle("is-success", type === "success");
+  };
+
+  const renderTurnstile = () => {
+    const sitekey = config.turnstileSiteKey;
+    if (!sitekey || !turnstileEl || !window.turnstile) return;
+    if (turnstileWidgetId !== null) return;
+
+    turnstileWidgetId = window.turnstile.render(turnstileEl, {
+      sitekey,
+      theme: "dark",
+    });
+  };
+
+  const waitForTurnstile = () => {
+    if (window.turnstile) {
+      renderTurnstile();
+      return;
+    }
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+      if (window.turnstile) {
+        clearInterval(timer);
+        renderTurnstile();
+      } else if (tries > 40) {
+        clearInterval(timer);
+      }
+    }, 100);
+  };
+
+  waitForTurnstile();
+
+  const getTurnstileToken = () => {
+    if (!config.turnstileSiteKey) return "";
+    if (turnstileWidgetId === null || !window.turnstile) return "";
+    return window.turnstile.getResponse(turnstileWidgetId) || "";
+  };
+
+  const resetTurnstile = () => {
+    if (turnstileWidgetId !== null && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId);
+    }
   };
 
   const renderPreviews = () => {
@@ -117,6 +162,17 @@
 
     if (!form.reportValidity()) return;
 
+    if (!config.turnstileSiteKey) {
+      setStatus("Captcha is not configured yet. Add your Turnstile site key.", "error");
+      return;
+    }
+
+    const turnstileToken = getTurnstileToken();
+    if (!turnstileToken) {
+      setStatus("Please complete the captcha before submitting.", "error");
+      return;
+    }
+
     const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") || "").trim(),
@@ -124,6 +180,7 @@
       email: String(formData.get("email") || "").trim(),
       address: String(formData.get("address") || "").trim(),
       issue: String(formData.get("issue") || "").trim(),
+      turnstileToken,
       images: [],
     };
 
@@ -150,8 +207,10 @@
       form.reset();
       selectedFiles = [];
       renderPreviews();
+      resetTurnstile();
       setStatus("Request submitted. Our team will review your documentation shortly.", "success");
     } catch (error) {
+      resetTurnstile();
       setStatus(error.message || "Something went wrong.", "error");
     } finally {
       submitBtn.disabled = false;

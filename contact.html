@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=10" />
+    <link rel="stylesheet" href="css/styles.css?v=11" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -165,6 +165,12 @@
                 <p class="contact-upload__meta">Max 50MB per file. Formats: JPG, PNG, HEIC.</p>
               </div>
 
+              <div
+                id="turnstile-widget"
+                class="contact-form__turnstile"
+                aria-label="Captcha"
+              ></div>
+
               <p class="contact-form__status" data-form-status hidden></p>
 
               <button class="contact-form__submit" type="submit" data-submit>
@@ -245,6 +251,7 @@
       </div>
     </footer>
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
     <script src="js/contact-form.js"></script>
