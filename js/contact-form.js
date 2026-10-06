@@ -72,8 +72,10 @@
 
     previews.querySelectorAll("[data-preview]").forEach((node) => node.remove());
 
+    const maxFiles = config.maxFiles || 6;
+
     if (emptySlot) {
-      emptySlot.hidden = selectedFiles.length > 0;
+      emptySlot.hidden = selectedFiles.length >= maxFiles;
     }
 
     selectedFiles.forEach((file, index) => {
@@ -97,7 +99,7 @@
       });
       slot.appendChild(remove);
 
-      previews.appendChild(slot);
+      previews.insertBefore(slot, emptySlot || null);
     });
   };
 

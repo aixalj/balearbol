@@ -1745,7 +1745,7 @@ body.is-menu-open {
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 12px;
-  background: #dfe7a8;
+  background: #c1cc6c;
 }
 
 .contact-upload__slot--empty {
@@ -1754,11 +1754,26 @@ body.is-menu-open {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  width: 100%;
+  border: 0;
+  padding: 16px;
   color: var(--brand-black);
+  font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.contact-upload__slot--empty:hover {
+  opacity: 0.92;
+}
+
+.contact-upload__slot--empty:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 .contact-upload__slot img {
@@ -1778,25 +1793,6 @@ body.is-menu-open {
   color: #fff;
   font-size: 18px;
   line-height: 1;
-}
-
-.contact-upload__attach {
-  width: 100%;
-  border: 0;
-  border-radius: 8px;
-  padding: 14px 18px;
-  background: var(--brand-green);
-  color: var(--brand-black);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.contact-upload__attach:hover {
-  opacity: 0.92;
 }
 
 .contact-upload__meta {
@@ -1865,6 +1861,7 @@ body.is-menu-open {
   padding: 28px 24px;
   border-radius: 16px;
   background: var(--brand-black);
+  flex-shrink: 0;
 }
 
 .contact-emergency__title {
@@ -1894,15 +1891,21 @@ body.is-menu-open {
 }
 
 .contact-aside__photo {
+  flex: 1 1 auto;
+  min-height: 280px;
   overflow: hidden;
   border-radius: 16px;
+  background: #3a3940;
   box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
 }
 
 .contact-aside__photo img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 280px;
   object-fit: cover;
+  object-position: center;
 }
 
 @media (min-width: 900px) {
@@ -1927,7 +1930,7 @@ body.is-menu-open {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.7fr);
     gap: 28px;
-    align-items: start;
+    align-items: stretch;
   }
 
   .contact-form {
@@ -1940,6 +1943,14 @@ body.is-menu-open {
 
   .contact-upload__previews {
     grid-template-columns: repeat(2, minmax(0, 180px));
+  }
+
+  .contact-aside__photo {
+    min-height: 420px;
+  }
+
+  .contact-aside__photo img {
+    min-height: 420px;
   }
 }
 

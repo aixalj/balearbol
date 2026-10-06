@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=11" />
+    <link rel="stylesheet" href="css/styles.css?v=12" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -142,12 +142,18 @@
                 </div>
 
                 <div class="contact-upload__previews" data-upload-previews>
-                  <div class="contact-upload__slot contact-upload__slot--empty" data-upload-empty>
+                  <button
+                    type="button"
+                    class="contact-upload__slot contact-upload__slot--empty"
+                    data-upload-empty
+                    data-upload-trigger
+                    aria-label="Upload images"
+                  >
                     <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
                       <path d="M14 13.5V3M14 3l-4 4M14 3l4 4M3 12.5v2A2.5 2.5 0 0 0 5.5 17h17a2.5 2.5 0 0 0 2.5-2.5v-2" stroke="#1E1D22" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Base View</span>
-                  </div>
+                    <span>Upload Images</span>
+                  </button>
                 </div>
 
                 <input
@@ -159,9 +165,6 @@
                   hidden
                 />
 
-                <button class="contact-upload__attach" type="button" data-upload-trigger>
-                  Attach Files
-                </button>
                 <p class="contact-upload__meta">Max 50MB per file. Formats: JPG, PNG, HEIC.</p>
               </div>
 
