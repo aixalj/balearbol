@@ -1,11 +1,17 @@
 /**
  * Vercel serverless function: POST /api/contact
- * Writes a Clients record to Airtable (images as attachment URLs from Cloudinary).
+ * Writes a record to Airtable (images as attachment URLs from Cloudinary).
  *
  * Required env vars (set in Vercel / .env.local for `vercel dev`):
  * - AIRTABLE_API_KEY
  * - AIRTABLE_BASE_ID
  * - AIRTABLE_TABLE_NAME (defaults to "Clients")
+ *
+ * Expected Airtable fields:
+ * - Client Name, Phone Number, Email Address, Location Address,
+ *   Specific Hazard Issue, Tree Documentation (attachment),
+ *   Payment Status (single select: Pending | Paid | Unpaid)
+ * Submission Date should be a Created time field (auto — do not write).
  */
 
 module.exports = async function handler(req, res) {
@@ -44,17 +50,16 @@ module.exports = async function handler(req, res) {
   }
 
   const fields = {
-    Name: name,
-    Email: email,
-    Phone: phone,
-    Address: address,
-    Issue: issue,
-    Status: "Lead",
-    "Date Submitted": new Date().toISOString().slice(0, 10),
+    "Client Name": name,
+    "Phone Number": phone,
+    "Email Address": email,
+    "Location Address": address,
+    "Specific Hazard Issue": issue,
+    "Payment Status": "Pending",
   };
 
   if (images.length) {
-    fields.Images = images.map((url) => ({ url }));
+    fields["Tree Documentation"] = images.map((url) => ({ url }));
   }
 
   try {
