@@ -79,8 +79,14 @@ module.exports = async function handler(req, res) {
 
     if (!response.ok) {
       console.error("Airtable error", data);
+      const airtableMessage =
+        data?.error?.message ||
+        data?.error?.type ||
+        (typeof data?.error === "string" ? data.error : null) ||
+        "Failed to save to Airtable.";
       return res.status(502).json({
-        error: data?.error?.message || "Failed to save to Airtable.",
+        error: airtableMessage,
+        airtable: data?.error || data,
       });
     }
 
