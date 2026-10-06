@@ -9,7 +9,7 @@
  *
  * Expected Airtable fields:
  * - Client Name, Phone Number, Email Address, Location Address,
- *   Specific Hazard Issue, Tree Documentation (attachment),
+ *   Specific Hazard Issue, Tree Documentation Image (attachment),
  *   Payment Status (single select: Pending | Paid | Unpaid)
  * Submission Date should be a Created time field (auto — do not write).
  */
@@ -59,7 +59,7 @@ module.exports = async function handler(req, res) {
   };
 
   if (images.length) {
-    fields["Tree Documentation"] = images.map((url) => ({ url }));
+    fields["Tree Documentation Image"] = images.map((url) => ({ url }));
   }
 
   try {
