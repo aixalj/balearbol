@@ -4,6 +4,7 @@
 
   const toggle = header.querySelector("[data-menu-toggle]");
   const mobileNav = header.querySelector("#mobile-nav");
+  const navLinks = header.querySelectorAll('.site-nav a[href^="#"], .mobile-nav a[href^="#"]');
 
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
@@ -22,7 +23,18 @@
     if (event.key === "Escape") setOpen(false);
   });
 
-  mobileNav?.querySelectorAll("a").forEach((link) => {
+  header.querySelectorAll("#mobile-nav a").forEach((link) => {
     link.addEventListener("click", () => setOpen(false));
   });
+
+  const setActiveFromHash = () => {
+    const hash = window.location.hash || "#home";
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      link.classList.toggle("is-active", href === hash);
+    });
+  };
+
+  window.addEventListener("hashchange", setActiveFromHash);
+  setActiveFromHash();
 })();

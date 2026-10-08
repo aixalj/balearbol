@@ -1,9 +1,12 @@
 window.BALEARBOL_CONFIG = {
-  // Public values only — never put Airtable or Turnstile secrets here.
+  // Public values only — never put Airtable, Turnstile, or Instagram secrets here.
   cloudinaryCloudName: "vk9obsj0",
   cloudinaryUploadPreset: "balearbol_uploads",
   // Cloudflare Turnstile site key (Dashboard → Turnstile → your widget)
   turnstileSiteKey: "0x4AAAAAAFPinahvYgrtxa2m",
+  // Instagram handle without @ — used for the Follow link
+  instagramUsername: "",
+  instagramApiUrl: "/api/instagram",
   contactApiUrl: "/api/contact",
   maxFiles: 6,
   maxFileBytes: 50 * 1024 * 1024,
