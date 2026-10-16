@@ -10,7 +10,7 @@ window.BALEARBOL_CONFIG = {
   // Optional Facebook page URL for header social icon
   facebookUrl: "https://www.facebook.com/people/BaleArbol/61567178275515/?locale=es_ES#",
   // Shown in the header top bar and contact emergency block
-  emergencyPhone: "12345678",
+  emergencyPhone: "+34620059167",
   contactApiUrl: "/api/contact",
   maxFiles: 6,
   maxFileBytes: 50 * 1024 * 1024,
