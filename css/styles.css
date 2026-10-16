@@ -389,7 +389,7 @@ button {
 
 .about-hero__media {
   width: 100%;
-  max-width: 280px;
+  max-width: 340px;
   margin: 0 auto;
 }
 
@@ -417,8 +417,8 @@ button {
 
   .about-hero__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+    gap: 20px;
     align-items: center;
   }
 
@@ -426,8 +426,12 @@ button {
     padding-right: 0;
   }
 
+  .about-hero__text {
+    max-width: none;
+  }
+
   .about-hero__media {
-    max-width: 280px;
+    max-width: 360px;
     margin: 0;
   }
 }
