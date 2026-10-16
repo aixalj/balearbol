@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=88" />
+    <link rel="stylesheet" href="css/styles.css?v=89" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -451,66 +451,74 @@
               </div>
             </div>
 
-            <div class="about-certs__grid">
-              <article class="cert-card cert-card--accent">
-                <img
-                  class="cert-card__glyph"
-                  src="assets/about/certs/plus-shield.svg"
-                  alt=""
-                  width="32"
-                  height="40"
-                />
-                <h3 class="cert-card__title">Fully Insured Company</h3>
-                <p class="cert-card__text">
-                  Public liability cover for every climb, clearance, and call-out —
-                  so your property is protected while we work.
-                </p>
-              </article>
+            <div class="about-certs__carousel" data-certs-carousel>
+              <div class="about-certs__grid" data-certs-track>
+                <article class="cert-card cert-card--accent">
+                  <img
+                    class="cert-card__glyph"
+                    src="assets/about/certs/plus-shield.svg"
+                    alt=""
+                    width="32"
+                    height="40"
+                  />
+                  <h3 class="cert-card__title">Fully Insured Company</h3>
+                  <p class="cert-card__text">
+                    Public liability cover for every climb, clearance, and call-out —
+                    so your property is protected while we work.
+                  </p>
+                </article>
 
-              <article class="cert-card cert-card--dark">
-                <img
-                  class="cert-card__glyph"
-                  src="assets/about/certs/rigger.svg"
-                  alt=""
-                  width="44"
-                  height="36"
-                />
-                <h3 class="cert-card__title">Qualified Climbing Crew</h3>
-                <p class="cert-card__text">
-                  Trained arborists for technical tree surgery and rigging in
-                  tight Balearic sites, from villa gardens to hillside stands.
-                </p>
-              </article>
+                <article class="cert-card cert-card--dark">
+                  <img
+                    class="cert-card__glyph"
+                    src="assets/about/certs/rigger.svg"
+                    alt=""
+                    width="44"
+                    height="36"
+                  />
+                  <h3 class="cert-card__title">Qualified Climbing Crew</h3>
+                  <p class="cert-card__text">
+                    Trained arborists for technical tree surgery and rigging in
+                    tight Balearic sites, from villa gardens to hillside stands.
+                  </p>
+                </article>
 
-              <article class="cert-card cert-card--accent">
-                <img
-                  class="cert-card__glyph"
-                  src="assets/about/certs/shield.svg"
-                  alt=""
-                  width="32"
-                  height="40"
-                />
-                <h3 class="cert-card__title">PRL Safety Training</h3>
-                <p class="cert-card__text">
-                  Ongoing prevención de riesgos laborales training so every
-                  ascent and chainsaw job follows Spanish workplace standards.
-                </p>
-              </article>
+                <article class="cert-card cert-card--accent">
+                  <img
+                    class="cert-card__glyph"
+                    src="assets/about/certs/shield.svg"
+                    alt=""
+                    width="32"
+                    height="40"
+                  />
+                  <h3 class="cert-card__title">PRL Safety Training</h3>
+                  <p class="cert-card__text">
+                    Ongoing prevención de riesgos laborales training so every
+                    ascent and chainsaw job follows Spanish workplace standards.
+                  </p>
+                </article>
 
-              <article class="cert-card cert-card--dark">
-                <img
-                  class="cert-card__glyph"
-                  src="assets/about/certs/mountain.svg"
-                  alt=""
-                  width="36"
-                  height="20"
-                />
-                <h3 class="cert-card__title">Local Balearic Compliance</h3>
-                <p class="cert-card__text">
-                  Familiar with island permits, fire-break requirements, and
-                  municipal rules for vegetation work across Ibiza and beyond.
-                </p>
-              </article>
+                <article class="cert-card cert-card--dark">
+                  <img
+                    class="cert-card__glyph"
+                    src="assets/about/certs/mountain.svg"
+                    alt=""
+                    width="36"
+                    height="20"
+                  />
+                  <h3 class="cert-card__title">Local Balearic Compliance</h3>
+                  <p class="cert-card__text">
+                    Familiar with island permits, fire-break requirements, and
+                    municipal rules for vegetation work across Ibiza and beyond.
+                  </p>
+                </article>
+              </div>
+              <div
+                class="about-certs__dots"
+                data-certs-dots
+                role="tablist"
+                aria-label="Certification slides"
+              ></div>
             </div>
           </div>
 
@@ -656,7 +664,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/main.js?v=42"></script>
-    <script src="js/services-carousel.js?v=1"></script>
+    <script src="js/services-carousel.js?v=2"></script>
     <script src="js/instagram-feed.js?v=47"></script>
   </body>
 </html>

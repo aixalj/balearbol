@@ -1,79 +1,107 @@
 (() => {
-  const carousel = document.querySelector("[data-services-carousel]");
-  const track = document.querySelector("[data-services-track]");
-  const dotsHost = document.querySelector("[data-services-dots]");
-  if (!carousel || !track || !dotsHost) return;
+  /**
+   * @param {{
+   *   root: string,
+   *   track: string,
+   *   dots: string,
+   *   cards: string,
+   *   label: string,
+   *   maxWidth?: number,
+   * }} options
+   */
+  const initCarousel = ({ root, track, dots, cards, label, maxWidth = 699 }) => {
+    const carousel = document.querySelector(root);
+    const trackEl = carousel?.querySelector(track) || document.querySelector(track);
+    const dotsHost = carousel?.querySelector(dots) || document.querySelector(dots);
+    if (!carousel || !trackEl || !dotsHost) return;
 
-  const cards = [...track.querySelectorAll(".service-card")];
-  if (cards.length < 2) return;
+    const cardEls = [...trackEl.querySelectorAll(cards)];
+    if (cardEls.length < 2) return;
 
-  const mobileMq = window.matchMedia("(max-width: 699px)");
-  /** @type {HTMLButtonElement[]} */
-  let dots = [];
+    const mobileMq = window.matchMedia(`(max-width: ${maxWidth}px)`);
+    /** @type {HTMLButtonElement[]} */
+    let dotButtons = [];
 
-  const nearestIndex = () => {
-    const left = track.scrollLeft;
-    let best = 0;
-    let bestDist = Infinity;
-    cards.forEach((card, index) => {
-      const dist = Math.abs(card.offsetLeft - left);
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = index;
-      }
-    });
-    return best;
-  };
-
-  const setActive = (index) => {
-    dots.forEach((dot, i) => {
-      const active = i === index;
-      dot.classList.toggle("is-active", active);
-      dot.setAttribute("aria-selected", active ? "true" : "false");
-    });
-  };
-
-  const buildDots = () => {
-    dotsHost.replaceChildren();
-    dots = cards.map((_, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "services__dot";
-      button.setAttribute("role", "tab");
-      button.setAttribute("aria-label", `Go to service ${index + 1}`);
-      button.addEventListener("click", () => {
-        track.scrollTo({ left: cards[index].offsetLeft, behavior: "smooth" });
-        setActive(index);
+    const nearestIndex = () => {
+      const left = trackEl.scrollLeft;
+      let best = 0;
+      let bestDist = Infinity;
+      cardEls.forEach((card, index) => {
+        const dist = Math.abs(card.offsetLeft - left);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = index;
+        }
       });
-      dotsHost.appendChild(button);
-      return button;
-    });
-    setActive(nearestIndex());
-  };
+      return best;
+    };
 
-  let ticking = false;
-  const onScroll = () => {
-    if (!mobileMq.matches) return;
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(() => {
-      setActive(nearestIndex());
-      ticking = false;
-    });
-  };
+    const setActive = (index) => {
+      dotButtons.forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    };
 
-  const syncMode = () => {
-    if (mobileMq.matches) {
-      if (!dots.length) buildDots();
-      else setActive(nearestIndex());
-    } else {
+    const buildDots = () => {
       dotsHost.replaceChildren();
-      dots = [];
-    }
+      dotButtons = cardEls.map((_, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "scroll-carousel__dot";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-label", `${label} ${index + 1}`);
+        button.addEventListener("click", () => {
+          trackEl.scrollTo({ left: cardEls[index].offsetLeft, behavior: "smooth" });
+          setActive(index);
+        });
+        dotsHost.appendChild(button);
+        return button;
+      });
+      setActive(nearestIndex());
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!mobileMq.matches) return;
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        setActive(nearestIndex());
+        ticking = false;
+      });
+    };
+
+    const syncMode = () => {
+      if (mobileMq.matches) {
+        if (!dotButtons.length) buildDots();
+        else setActive(nearestIndex());
+      } else {
+        dotsHost.replaceChildren();
+        dotButtons = [];
+      }
+    };
+
+    trackEl.addEventListener("scroll", onScroll, { passive: true });
+    mobileMq.addEventListener("change", syncMode);
+    window.addEventListener("resize", syncMode);
+    syncMode();
   };
 
-  track.addEventListener("scroll", onScroll, { passive: true });
-  mobileMq.addEventListener("change", syncMode);
-  window.addEventListener("resize", syncMode);
-  syncMode();
+  initCarousel({
+    root: "[data-services-carousel]",
+    track: "[data-services-track]",
+    dots: "[data-services-dots]",
+    cards: ".service-card",
+    label: "Go to service",
+  });
+
+  initCarousel({
+    root: "[data-certs-carousel]",
+    track: "[data-certs-track]",
+    dots: "[data-certs-dots]",
+    cards: ".cert-card",
+    label: "Go to certification",
+  });
 })();

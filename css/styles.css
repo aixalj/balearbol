@@ -548,6 +548,13 @@ button {
   height: 30px;
 }
 
+.about-certs__carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
 .about-certs__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -656,9 +663,54 @@ button {
   }
 }
 
-@media (min-width: 640px) and (max-width: 899px) {
+@media (min-width: 700px) and (max-width: 899px) {
   .about-certs__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile: swipeable cert cards with next-card peek */
+@media (max-width: 699px) {
+  .standards {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .standards__inner {
+    padding: 0 24px;
+  }
+
+  .about-certs__carousel {
+    margin-inline: -24px;
+    width: calc(100% + 48px);
+  }
+
+  .about-certs__grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
+    padding: 2px 24px 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .about-certs__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cert-card {
+    flex: 0 0 min(78%, 280px);
+    width: min(78%, 280px);
+    scroll-snap-align: start;
+  }
+
+  .about-certs__dots {
+    display: flex;
+    padding: 0 24px;
   }
 }
 
@@ -1039,14 +1091,15 @@ body.is-menu-open {
   grid-template-columns: 1fr;
 }
 
-.services__dots {
+.services__dots,
+.about-certs__dots {
   display: none;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.services__dot {
+.scroll-carousel__dot {
   width: 8px;
   height: 8px;
   padding: 0;
@@ -1057,9 +1110,17 @@ body.is-menu-open {
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.services__dot.is-active {
+.scroll-carousel__dot.is-active {
   background: #173124;
   transform: scale(1.15);
+}
+
+.about-certs .scroll-carousel__dot {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.about-certs .scroll-carousel__dot.is-active {
+  background: var(--brand-green);
 }
 
 .service-card {
