@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=84" />
+    <link rel="stylesheet" href="css/styles.css?v=85" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -205,7 +205,7 @@
             <form class="contact-form" id="contact-form" novalidate>
               <div class="contact-form__row contact-form__row--2">
                 <label class="contact-field">
-                  <span class="contact-field__label">Client Name</span>
+                  <span class="contact-field__label">Client Name <span class="contact-field__required">*</span></span>
                   <input
                     type="text"
                     name="name"
@@ -215,7 +215,7 @@
                   />
                 </label>
                 <label class="contact-field">
-                  <span class="contact-field__label">Phone Number</span>
+                  <span class="contact-field__label">Phone Number <span class="contact-field__required">*</span></span>
                   <input
                     type="tel"
                     name="phone"
@@ -227,7 +227,7 @@
               </div>
 
               <label class="contact-field">
-                <span class="contact-field__label">Email Address</span>
+                <span class="contact-field__label">Email Address <span class="contact-field__required">*</span></span>
                 <input
                   type="email"
                   name="email"
@@ -238,7 +238,7 @@
               </label>
 
               <label class="contact-field contact-field--icon">
-                <span class="contact-field__label">Location Address</span>
+                <span class="contact-field__label">Location Address <span class="contact-field__required">*</span></span>
                 <span class="contact-field__control">
                   <svg class="contact-field__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6C12.5 3.5 10.5 1.5 8 1.5Zm0 6.25A1.75 1.75 0 1 1 8 4.25a1.75 1.75 0 0 1 0 3.5Z" fill="#C1CC6C"/>
@@ -253,11 +253,13 @@
                 </span>
               </label>
 
-              <fieldset class="contact-services">
-                <legend class="contact-field__label">What kinds of work do you need done?</legend>
+              <fieldset class="contact-services" data-services-fieldset>
+                <legend class="contact-field__label">
+                  What kinds of work do you need done? <span class="contact-field__required">*</span>
+                </legend>
                 <div class="contact-services__options">
                   <label class="contact-services__option">
-                    <input type="checkbox" name="services" value="Tree Surgery" />
+                    <input type="checkbox" name="services" value="Tree Surgery" required />
                     <span>Tree Surgery</span>
                   </label>
                   <label class="contact-services__option">
@@ -276,7 +278,7 @@
               </fieldset>
 
               <label class="contact-field">
-                <span class="contact-field__label">Tell us more about what you need done</span>
+                <span class="contact-field__label">Tell us more about what you need done <span class="contact-field__required">*</span></span>
                 <textarea
                   name="issue"
                   rows="5"
@@ -293,7 +295,9 @@
                     <path d="M22.5 3.5v4M20.5 5.5h4" stroke="#C1CC6C" stroke-width="1.6" stroke-linecap="round"/>
                   </svg>
                   <div>
-                    <p class="contact-upload__title">Tree Documentation</p>
+                    <p class="contact-upload__title">
+                      Tree Documentation <span class="contact-field__required">*</span>
+                    </p>
                     <p class="contact-upload__hint">Upload high-resolution photos of the tree from multiple angles.</p>
                   </div>
                 </div>
@@ -431,6 +435,6 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script src="js/config.js"></script>
     <script src="js/main.js?v=41"></script>
-    <script src="js/contact-form.js?v=2"></script>
+    <script src="js/contact-form.js?v=3"></script>
   </body>
 </html>

@@ -109,6 +109,14 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Please fill in all required fields." });
   }
 
+  if (!services.length) {
+    return res.status(400).json({ error: "Please select at least one type of work." });
+  }
+
+  if (!images.length) {
+    return res.status(400).json({ error: "Please upload at least one photo." });
+  }
+
   const fields = {
     "Client Name": name,
     "Phone Number": phone,
@@ -116,15 +124,9 @@ module.exports = async function handler(req, res) {
     "Location Address": address,
     "Specific Hazard Issue": issue,
     "Payment Status": "Pending",
+    "Services Needed": services,
+    "Tree Documentation Image": images.map((url) => ({ url })),
   };
-
-  if (services.length) {
-    fields["Services Needed"] = services;
-  }
-
-  if (images.length) {
-    fields["Tree Documentation Image"] = images.map((url) => ({ url }));
-  }
 
   try {
     const response = await fetch(

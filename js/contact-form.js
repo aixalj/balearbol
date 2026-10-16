@@ -127,6 +127,20 @@
     renderPreviews();
   };
 
+  const serviceInputs = [...form.querySelectorAll('input[name="services"]')];
+
+  const syncServiceRequired = () => {
+    const anyChecked = serviceInputs.some((input) => input.checked);
+    serviceInputs.forEach((input, index) => {
+      input.required = index === 0 && !anyChecked;
+    });
+  };
+
+  serviceInputs.forEach((input) => {
+    input.addEventListener("change", syncServiceRequired);
+  });
+  syncServiceRequired();
+
   trigger?.addEventListener("click", () => fileInput?.click());
   fileInput?.addEventListener("change", () => {
     addFiles(fileInput.files);
@@ -161,8 +175,27 @@
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     setStatus("", null);
+    syncServiceRequired();
 
     if (!form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const services = formData
+      .getAll("services")
+      .map((value) => String(value || "").trim())
+      .filter(Boolean);
+
+    if (!services.length) {
+      setStatus("Please select at least one type of work.", "error");
+      serviceInputs[0]?.focus();
+      return;
+    }
+
+    if (!selectedFiles.length) {
+      setStatus("Please upload at least one photo of the tree or site.", "error");
+      fileInput?.focus();
+      return;
+    }
 
     if (!config.turnstileSiteKey) {
       setStatus("Captcha is not configured yet. Add your Turnstile site key.", "error");
@@ -175,11 +208,6 @@
       return;
     }
 
-    const formData = new FormData(form);
-    const services = formData
-      .getAll("services")
-      .map((value) => String(value || "").trim())
-      .filter(Boolean);
     const payload = {
       name: String(formData.get("name") || "").trim(),
       phone: String(formData.get("phone") || "").trim(),
@@ -195,9 +223,7 @@
     if (submitLabel) submitLabel.textContent = "Submitting…";
 
     try {
-      if (selectedFiles.length) {
-        payload.images = await Promise.all(selectedFiles.map(uploadToCloudinary));
-      }
+      payload.images = await Promise.all(selectedFiles.map(uploadToCloudinary));
 
       const response = await fetch(config.contactApiUrl || "/api/contact", {
         method: "POST",
@@ -214,6 +240,7 @@
       form.reset();
       selectedFiles = [];
       renderPreviews();
+      syncServiceRequired();
       resetTurnstile();
       setStatus(
         "Thanks — we’ve got your request. We’ll take a look at the details and get back to you soon.",

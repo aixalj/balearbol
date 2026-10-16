@@ -1446,6 +1446,11 @@ body.is-menu-open {
   text-transform: uppercase;
 }
 
+.contact-field__required {
+  color: var(--brand-emergency);
+  letter-spacing: 0;
+}
+
 .contact-field input,
 .contact-field textarea {
   width: 100%;
