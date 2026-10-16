@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=38" />
+    <link rel="stylesheet" href="css/styles.css?v=39" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -212,11 +212,9 @@
         </div>
       </section>
 
-      <section class="about-hero" id="about" aria-labelledby="about-hero-title">
+      <section class="about-hero" id="about" aria-label="About us">
         <div class="about-hero__inner">
           <div class="about-hero__copy">
-            <p class="about-hero__badge">Established 2024</p>
-            <h2 class="about-hero__title" id="about-hero-title">About Us</h2>
             <p class="about-hero__text">
               We don't just prune trees; we engineer the canopy. With over
               three decades of technical rigging experience, our team
@@ -226,16 +224,102 @@
           </div>
 
           <div class="about-hero__media">
-            <div class="about-hero__accent" aria-hidden="true"></div>
-            <div class="about-hero__frame" aria-hidden="true"></div>
             <div class="about-hero__photo">
               <img
                 src="assets/about/arborist.png"
                 alt="Arborist in safety gear climbing a tree"
-                width="512"
-                height="640"
+                width="400"
+                height="400"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" id="services" aria-labelledby="services-heading">
+        <div class="services__inner">
+          <div class="services__header">
+            <h2 class="services__title" id="services-heading">Our Services</h2>
+          </div>
+
+          <div class="services__grid">
+            <article class="service-card">
+              <div class="service-card__media">
+                <img
+                  src="assets/hero/arborist.jpg"
+                  alt="Arborist carrying out tree surgery at height"
+                  width="620"
+                  height="1024"
+                  loading="lazy"
+                />
+              </div>
+              <div class="service-card__body">
+                <h3 class="service-card__title">Tree Surgery</h3>
+                <p class="service-card__text">
+                  Precision pruning, crown reduction, and sectional dismantling
+                  that protects tree health while keeping properties and
+                  canopies safe.
+                </p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card__media">
+                <img
+                  src="assets/equipment/chainsaw.jpg"
+                  alt="Forestry work with professional chainsaw"
+                  width="1024"
+                  height="666"
+                  loading="lazy"
+                />
+              </div>
+              <div class="service-card__body">
+                <h3 class="service-card__title">Forestry Work</h3>
+                <p class="service-card__text">
+                  Managed thinning, clearance, and woodland maintenance for
+                  estates, rural sites, and larger forest stands.
+                </p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card__media">
+                <img
+                  src="assets/services/rigging.jpg"
+                  alt="Creating and maintaining fire breaks"
+                  width="986"
+                  height="600"
+                  loading="lazy"
+                />
+              </div>
+              <div class="service-card__body">
+                <h3 class="service-card__title">Fire Breaks</h3>
+                <p class="service-card__text">
+                  Strategic vegetation clearance and fire-break creation to
+                  reduce wildfire risk around homes, tracks, and boundaries.
+                </p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card__media">
+                <img
+                  src="assets/services/gear.jpg"
+                  alt="Storm damage response and emergency call out"
+                  width="700"
+                  height="700"
+                  loading="lazy"
+                />
+              </div>
+              <div class="service-card__body">
+                <h3 class="service-card__title">Storm Damage Call Outs</h3>
+                <p class="service-card__text">
+                  Rapid response for fallen, hung-up, or wind-damaged trees —
+                  made safe quickly with controlled rigging and removal.
+                </p>
+                <a class="service-card__cta" href="contact.html">Emergency Dispatch</a>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -380,94 +464,6 @@
                     <span>Advanced Tree Risk Assessment</span>
                   </li>
                 </ul>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="services" id="services" aria-labelledby="services-heading">
-        <div class="services__inner">
-          <div class="services__header">
-            <h2 class="services__title" id="services-heading">Our Services</h2>
-          </div>
-
-          <div class="services__grid">
-            <article class="service-card">
-              <div class="service-card__media">
-                <img
-                  src="assets/hero/arborist.jpg"
-                  alt="Arborist carrying out tree surgery at height"
-                  width="620"
-                  height="1024"
-                  loading="lazy"
-                />
-              </div>
-              <div class="service-card__body">
-                <h3 class="service-card__title">Tree Surgery</h3>
-                <p class="service-card__text">
-                  Precision pruning, crown reduction, and sectional dismantling
-                  that protects tree health while keeping properties and
-                  canopies safe.
-                </p>
-              </div>
-            </article>
-
-            <article class="service-card">
-              <div class="service-card__media">
-                <img
-                  src="assets/equipment/chainsaw.jpg"
-                  alt="Forestry work with professional chainsaw"
-                  width="1024"
-                  height="666"
-                  loading="lazy"
-                />
-              </div>
-              <div class="service-card__body">
-                <h3 class="service-card__title">Forestry Work</h3>
-                <p class="service-card__text">
-                  Managed thinning, clearance, and woodland maintenance for
-                  estates, rural sites, and larger forest stands.
-                </p>
-              </div>
-            </article>
-
-            <article class="service-card">
-              <div class="service-card__media">
-                <img
-                  src="assets/services/rigging.jpg"
-                  alt="Creating and maintaining fire breaks"
-                  width="986"
-                  height="600"
-                  loading="lazy"
-                />
-              </div>
-              <div class="service-card__body">
-                <h3 class="service-card__title">Fire Breaks</h3>
-                <p class="service-card__text">
-                  Strategic vegetation clearance and fire-break creation to
-                  reduce wildfire risk around homes, tracks, and boundaries.
-                </p>
-              </div>
-            </article>
-
-            <article class="service-card">
-              <div class="service-card__media">
-                <img
-                  src="assets/services/gear.jpg"
-                  alt="Storm damage response and emergency call out"
-                  width="700"
-                  height="700"
-                  loading="lazy"
-                />
-              </div>
-              <div class="service-card__body">
-                <h3 class="service-card__title">Storm Damage Call Outs</h3>
-                <p class="service-card__text">
-                  Rapid response for fallen, hung-up, or wind-damaged trees —
-                  made safe quickly with controlled rigging and removal.
-                </p>
-                <a class="service-card__cta" href="contact.html">Emergency Dispatch</a>
               </div>
             </article>
           </div>
