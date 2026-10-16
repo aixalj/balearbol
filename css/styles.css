@@ -620,7 +620,7 @@ button {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 40px;
   width: 100%;
   max-width: var(--content-max);
 }
@@ -635,25 +635,23 @@ button {
 }
 
 .about-team__list {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
 }
 
 .team-member {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
+  min-width: 0;
 }
 
 .team-member__photo {
   width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
   overflow: hidden;
   border-radius: 12px;
   background: #e9f0e4;
-  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.25);
 }
 
 .team-member__photo img {
@@ -661,13 +659,14 @@ button {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
+  display: block;
 }
 
 .team-member__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .team-member__role {
@@ -684,7 +683,7 @@ button {
 .team-member__name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 40px);
+  font-size: clamp(28px, 4vw, 36px);
   font-weight: 700;
   line-height: 1.1;
   color: #173124;
@@ -692,7 +691,6 @@ button {
 
 .team-member__bio {
   margin: 0;
-  max-width: 28em;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
@@ -726,55 +724,22 @@ button {
   height: 14px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .about-team {
     padding: 120px 32px;
   }
 
   .about-team__inner {
-    gap: 72px;
+    gap: 48px;
   }
 
   .about-team__list {
-    gap: 96px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
   }
 
   .team-member {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    gap: 64px;
-    align-items: center;
-  }
-
-  .team-member--reverse {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  }
-
-  .team-member--reverse .team-member__photo {
-    order: 2;
-  }
-
-  .team-member--reverse .team-member__content {
-    order: 1;
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  .team-member--reverse .team-member__bio {
-    margin-left: auto;
-  }
-
-  .team-member--reverse .team-member__certs {
-    align-items: flex-end;
-  }
-
-  .team-member--reverse .team-member__certs li {
-    flex-direction: row-reverse;
-  }
-
-  .team-member__photo {
-    max-width: none;
-    margin: 0;
+    gap: 24px;
   }
 }
 
