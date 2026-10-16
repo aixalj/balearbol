@@ -6,6 +6,7 @@
   const username = String(config.instagramUsername || "").replace(/^@/, "").trim();
   const profileLinks = document.querySelectorAll("[data-instagram-profile]");
   const apiUrl = config.instagramApiUrl || "/api/instagram";
+  const avatarUrl = "assets/brand/logo.jpg";
 
   if (username) {
     const href = `https://www.instagram.com/${encodeURIComponent(username)}/`;
@@ -23,9 +24,47 @@
     feed.innerHTML = `<p class="instagram-gallery__status">${message}</p>`;
   };
 
+  const escapeHtml = (value) =>
+    String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  const relativeTime = (iso) => {
+    if (!iso) return "";
+    const then = new Date(iso).getTime();
+    if (Number.isNaN(then)) return "";
+    const seconds = Math.max(0, Math.floor((Date.now() - then) / 1000));
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+
+    if (seconds < 60) return "just now";
+    if (minutes < 60) return minutes === 1 ? "a minute ago" : `${minutes} minutes ago`;
+    if (hours < 24) return hours === 1 ? "an hour ago" : `${hours} hours ago`;
+    if (days < 7) return days === 1 ? "a day ago" : `${days} days ago`;
+    if (weeks < 5) return weeks === 1 ? "a week ago" : `${weeks} weeks ago`;
+    if (months < 12) return months === 1 ? "a month ago" : `${months} months ago`;
+    return years === 1 ? "a year ago" : `${years} years ago`;
+  };
+
+  const instagramIcon = `
+    <span class="instagram-gallery__ig" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/>
+      </svg>
+    </span>
+  `;
+
   const playIcon = `
     <span class="instagram-gallery__play" aria-hidden="true">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M8.5 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/>
       </svg>
     </span>
@@ -43,9 +82,16 @@
 
     const grid = document.createElement("div");
     grid.className = "instagram-gallery__grid";
+    const handle = username || "instagram";
+    const displayHandle =
+      handle.length > 18 ? `${handle.slice(0, 16)}…` : handle;
 
     posts.forEach((post) => {
       const isVideo = Boolean(post.isVideo || post.mediaType === "VIDEO" || post.mediaType === "REELS");
+      const childCount = Number(post.childrenCount) || 0;
+      const isCarousel = post.mediaType === "CAROUSEL_ALBUM" && childCount > 1;
+      const timeLabel = relativeTime(post.timestamp);
+
       const link = document.createElement("a");
       link.className = "instagram-gallery__item" + (isVideo ? " is-video" : "");
       link.href = post.permalink || (username ? `https://www.instagram.com/${username}/` : "#");
@@ -89,9 +135,29 @@
         link.appendChild(img);
       }
 
-      if (isVideo) {
+      if (isCarousel) {
+        link.insertAdjacentHTML(
+          "beforeend",
+          `<span class="instagram-gallery__badge" aria-hidden="true">1/${childCount}</span>`
+        );
+      } else if (isVideo) {
         link.insertAdjacentHTML("beforeend", playIcon);
       }
+
+      link.insertAdjacentHTML(
+        "beforeend",
+        `
+        <span class="instagram-gallery__shade" aria-hidden="true"></span>
+        <span class="instagram-gallery__meta">
+          <img class="instagram-gallery__avatar" src="${avatarUrl}" alt="" width="28" height="28" />
+          <span class="instagram-gallery__meta-text">
+            <span class="instagram-gallery__user">${escapeHtml(displayHandle)}</span>
+            ${timeLabel ? `<span class="instagram-gallery__time">${escapeHtml(timeLabel)}</span>` : ""}
+          </span>
+        </span>
+        ${instagramIcon}
+        `
+      );
 
       grid.appendChild(link);
     });

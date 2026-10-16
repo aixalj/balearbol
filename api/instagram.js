@@ -96,6 +96,7 @@ module.exports = async function handler(req, res) {
           caption: item.caption || "",
           mediaType: type,
           isVideo,
+          childrenCount: type === "CAROUSEL_ALBUM" ? children.length : 0,
           imageUrl: imageUrl || videoUrl,
           videoUrl,
           permalink: item.permalink,
