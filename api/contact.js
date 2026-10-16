@@ -11,9 +11,13 @@
  *
  * Expected Airtable fields:
  * - Client Name, Phone Number, Email Address, Location Address,
+ *   Services Needed (multiple select),
  *   Specific Hazard Issue, Tree Documentation Image (attachment),
  *   Payment Status (single select: Pending | Paid | Unpaid)
  * Submission Date should be a Created time field (auto — do not write).
+ *
+ * Services Needed options:
+ * - Tree Surgery, Forestry Work, Fire Breaks, Storm Damage Call Outs
  */
 
 async function verifyTurnstile(token, ip) {
@@ -67,11 +71,22 @@ module.exports = async function handler(req, res) {
   }
 
   const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  const allowedServices = new Set([
+    "Tree Surgery",
+    "Forestry Work",
+    "Fire Breaks",
+    "Storm Damage Call Outs",
+  ]);
   const name = String(body.name || "").trim();
   const email = String(body.email || "").trim();
   const phone = String(body.phone || "").trim();
   const address = String(body.address || "").trim();
   const issue = String(body.issue || "").trim();
+  const services = Array.isArray(body.services)
+    ? body.services
+        .map((value) => String(value || "").trim())
+        .filter((value) => allowedServices.has(value))
+    : [];
   const turnstileToken = String(body.turnstileToken || "").trim();
   const images = Array.isArray(body.images) ? body.images.filter(Boolean) : [];
 
@@ -102,6 +117,10 @@ module.exports = async function handler(req, res) {
     "Specific Hazard Issue": issue,
     "Payment Status": "Pending",
   };
+
+  if (services.length) {
+    fields["Services Needed"] = services;
+  }
 
   if (images.length) {
     fields["Tree Documentation Image"] = images.map((url) => ({ url }));

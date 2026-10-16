@@ -176,12 +176,17 @@
     }
 
     const formData = new FormData(form);
+    const services = formData
+      .getAll("services")
+      .map((value) => String(value || "").trim())
+      .filter(Boolean);
     const payload = {
       name: String(formData.get("name") || "").trim(),
       phone: String(formData.get("phone") || "").trim(),
       email: String(formData.get("email") || "").trim(),
       address: String(formData.get("address") || "").trim(),
       issue: String(formData.get("issue") || "").trim(),
+      services,
       turnstileToken,
       images: [],
     };

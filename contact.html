@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=28" />
+    <link rel="stylesheet" href="css/styles.css?v=29" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -185,8 +185,30 @@
                 </span>
               </label>
 
+              <fieldset class="contact-services">
+                <legend class="contact-field__label">What kinds of work do you need done?</legend>
+                <div class="contact-services__options">
+                  <label class="contact-services__option">
+                    <input type="checkbox" name="services" value="Tree Surgery" />
+                    <span>Tree Surgery</span>
+                  </label>
+                  <label class="contact-services__option">
+                    <input type="checkbox" name="services" value="Forestry Work" />
+                    <span>Forestry Work</span>
+                  </label>
+                  <label class="contact-services__option">
+                    <input type="checkbox" name="services" value="Fire Breaks" />
+                    <span>Fire Breaks</span>
+                  </label>
+                  <label class="contact-services__option">
+                    <input type="checkbox" name="services" value="Storm Damage Call Outs" />
+                    <span>Storm Damage Call Outs</span>
+                  </label>
+                </div>
+              </fieldset>
+
               <label class="contact-field">
-                <span class="contact-field__label">Specific Hazard or Issue</span>
+                <span class="contact-field__label">Tell us more about what you need done</span>
                 <textarea
                   name="issue"
                   rows="5"
