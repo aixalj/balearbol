@@ -131,7 +131,7 @@ button {
 .site-header__social {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .site-header__social-link {
@@ -140,6 +140,11 @@ button {
   justify-content: center;
   color: var(--brand-white);
   transition: color 0.15s ease;
+}
+
+.site-header__social-link svg {
+  width: 26px;
+  height: 26px;
 }
 
 .site-header__social-link:hover {
