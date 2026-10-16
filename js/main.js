@@ -81,4 +81,40 @@
 
   window.addEventListener("hashchange", setActiveFromHash);
   setActiveFromHash();
+
+  // Hide sticky nav on scroll down; show on scroll up
+  const sticky = header.querySelector(".site-header__sticky");
+  if (sticky) {
+    let lastY = window.scrollY;
+    let ticking = false;
+    const topReveal = 80;
+
+    const updateStickyNav = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      const menuOpen = header.classList.contains("is-open");
+
+      if (menuOpen || y <= topReveal) {
+        sticky.classList.remove("is-hidden");
+      } else if (delta > 6) {
+        sticky.classList.add("is-hidden");
+      } else if (delta < -6) {
+        sticky.classList.remove("is-hidden");
+      }
+
+      lastY = y;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateStickyNav);
+        }
+      },
+      { passive: true }
+    );
+  }
 })();

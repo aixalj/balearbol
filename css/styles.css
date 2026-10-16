@@ -78,6 +78,19 @@ button {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 4px solid var(--brand-green);
+  transition: transform 0.28s ease;
+  will-change: transform;
+}
+
+.site-header__sticky.is-hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__sticky {
+    transition: none;
+  }
 }
 
 .site-topbar__inner {
