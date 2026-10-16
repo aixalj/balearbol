@@ -86,35 +86,32 @@
   const sticky = header.querySelector(".site-header__sticky");
   if (sticky) {
     let lastY = window.scrollY;
-    let ticking = false;
-    const topReveal = 80;
+    let hidden = false;
+    const topReveal = 24;
 
-    const updateStickyNav = () => {
-      ticking = false;
-      const y = window.scrollY;
+    const setHidden = (next) => {
+      if (hidden === next) return;
+      hidden = next;
+      sticky.classList.toggle("is-hidden", next);
+    };
+
+    const onScroll = () => {
+      const y = Math.max(0, window.scrollY);
       const delta = y - lastY;
       const menuOpen = header.classList.contains("is-open");
 
       if (menuOpen || y <= topReveal) {
-        sticky.classList.remove("is-hidden");
-      } else if (delta > 6) {
-        sticky.classList.add("is-hidden");
-      } else if (delta < -6) {
-        sticky.classList.remove("is-hidden");
+        setHidden(false);
+      } else if (delta > 4) {
+        setHidden(true);
+      } else if (delta < -4) {
+        setHidden(false);
       }
 
       lastY = y;
     };
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          ticking = true;
-          window.requestAnimationFrame(updateStickyNav);
-        }
-      },
-      { passive: true }
-    );
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 })();
