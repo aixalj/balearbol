@@ -1183,6 +1183,31 @@ body.is-menu-open {
   color: #c1cc6c;
 }
 
+.equipment__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  background: var(--brand-green);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--brand-black);
+  transition: opacity 0.15s ease;
+}
+
+.equipment__cta:hover {
+  opacity: 0.9;
+  color: var(--brand-black);
+}
+
 .equipment__media {
   position: relative;
   width: 100%;
@@ -1245,29 +1270,8 @@ body.is-menu-open {
   margin: 0 auto;
   overflow: hidden;
   border-radius: 16px;
-  background: #c1cc6c;
+  background: var(--brand-green);
   padding: 40px 28px;
-}
-
-.cta__glow {
-  position: absolute;
-  width: 384px;
-  height: 384px;
-  border-radius: 12px;
-  filter: blur(32px);
-  pointer-events: none;
-}
-
-.cta__glow--tl {
-  top: -96px;
-  left: -96px;
-  background: rgba(249, 115, 22, 0.1);
-}
-
-.cta__glow--br {
-  right: -96px;
-  bottom: -96px;
-  background: rgba(152, 181, 163, 0.1);
 }
 
 .cta__content {
@@ -1282,7 +1286,7 @@ body.is-menu-open {
 
 .cta__title {
   margin: 0;
-  max-width: 16ch;
+  max-width: 22ch;
   font-family: var(--font-display);
   font-size: clamp(2rem, 7vw, 2.5rem);
   font-weight: 700;
