@@ -860,7 +860,7 @@ button {
   .about-team__list {
     grid-template-columns: repeat(2, minmax(0, 360px));
     justify-content: center;
-    gap: 48px;
+    gap: 96px;
   }
 
   .team-member {
