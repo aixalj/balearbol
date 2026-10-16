@@ -1371,7 +1371,6 @@ body.is-menu-open {
   flex-direction: column;
   gap: 40px;
   background: transparent;
-  padding: 0;
   color: #ffffff;
 }
 
@@ -1451,11 +1450,11 @@ body.is-menu-open {
   padding: 14px 28px;
   border-radius: 6px;
   background: var(--brand-green);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--brand-black);
@@ -1486,6 +1485,14 @@ body.is-menu-open {
   max-width: none;
   object-fit: cover;
   object-position: center;
+}
+
+@media (max-width: 699px) {
+  .equipment {
+    padding-left: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+  }
 }
 
 @media (min-width: 960px) {
@@ -1571,11 +1578,11 @@ body.is-menu-open {
   border-radius: 6px;
   background: #1e1d22;
   padding: 16.5px 40px 17.5px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #ffffff;
   transition: opacity 0.15s ease;
@@ -2146,6 +2153,7 @@ body.is-menu-open {
 }
 
 .site-footer__nav a.site-footer__quote {
+  font-family: var(--font-body);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
