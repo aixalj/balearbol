@@ -4,7 +4,7 @@
   --brand-white: #ffffff;
   --brand-muted: #d6d3d1;
   --brand-page: #f6faf2;
-  --brand-emergency: #e23d3d;
+  --brand-emergency: #ff5c5c;
   --font-display: "Work Sans", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, sans-serif;
   --topbar-height: 38px;
@@ -92,7 +92,9 @@ button {
   padding: 6px 32px;
 }
 
-.site-topbar__emergency {
+.site-topbar__emergency,
+.site-topbar__emergency:link,
+.site-topbar__emergency:visited {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -112,6 +114,7 @@ button {
 
 .site-topbar__emergency:hover {
   opacity: 0.85;
+  color: var(--brand-emergency);
 }
 
 .site-topbar__langs {
