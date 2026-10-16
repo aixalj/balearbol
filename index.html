@@ -14,10 +14,63 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=34" />
+    <link rel="stylesheet" href="css/styles.css?v=36" />
   </head>
   <body>
     <header class="site-header" data-site-header>
+      <div class="site-topbar">
+        <div class="site-topbar__inner">
+          <a class="site-topbar__emergency" data-emergency-phone href="tel:12345678">
+            Emergency dispatch: <span data-emergency-phone-label>12345678</span>
+          </a>
+          <div class="site-topbar__langs" role="group" aria-label="Language">
+            <button
+              type="button"
+              class="site-topbar__lang is-active"
+              data-lang="en"
+              aria-label="English"
+              aria-pressed="true"
+              title="English"
+            >
+              <svg viewBox="0 0 28 20" aria-hidden="true">
+                <rect width="28" height="20" fill="#012169" />
+                <path d="M0 0l28 20M28 0L0 20" stroke="#fff" stroke-width="4" />
+                <path d="M0 0l28 20M28 0L0 20" stroke="#C8102E" stroke-width="2" />
+                <path d="M14 0v20M0 10h28" stroke="#fff" stroke-width="6" />
+                <path d="M14 0v20M0 10h28" stroke="#C8102E" stroke-width="3" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="site-topbar__lang"
+              data-lang="es"
+              aria-label="Español"
+              aria-pressed="false"
+              title="Español"
+            >
+              <svg viewBox="0 0 28 20" aria-hidden="true">
+                <rect width="28" height="20" fill="#AA151B" />
+                <rect y="5" width="28" height="10" fill="#F1BF00" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="site-topbar__lang"
+              data-lang="de"
+              aria-label="Deutsch"
+              aria-pressed="false"
+              title="Deutsch"
+            >
+              <svg viewBox="0 0 28 20" aria-hidden="true">
+                <rect width="28" height="20" fill="#000" />
+                <rect y="6.67" width="28" height="6.66" fill="#DD0000" />
+                <rect y="13.33" width="28" height="6.67" fill="#FFCE00" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="site-header__bar">
         <a class="site-logo" href="index.html#home">
           <img src="assets/brand/logo-green.png" alt="Balearbol" width="90" height="75" />
@@ -141,7 +194,6 @@
         <div class="hero__slash" aria-hidden="true"></div>
 
         <div class="hero__inner">
-          <p class="hero__eyebrow">Technical Rigging &amp; Arboriculture</p>
           <h1 class="hero__title">
             Precision at <span class="hero__accent">Altitude.</span><br />
             Safety at Heart.
@@ -153,7 +205,6 @@
           </p>
           <div class="hero__actions">
             <a class="btn btn--primary" href="contact.html">Request a Quote</a>
-            <a class="btn btn--secondary" href="#about">About</a>
           </div>
         </div>
       </section>
@@ -552,7 +603,7 @@
     </footer>
 
     <script src="js/config.js"></script>
-    <script src="js/main.js?v=31"></script>
+    <script src="js/main.js?v=36"></script>
     <script src="js/instagram-feed.js?v=20"></script>
   </body>
 </html>

@@ -6,7 +6,9 @@
   --brand-page: #fcf8fd;
   --font-display: "Work Sans", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, sans-serif;
-  --header-height: 99px;
+  --topbar-height: 38px;
+  --nav-height: 99px;
+  --header-height: calc(var(--topbar-height) + var(--nav-height));
   --content-max: 1280px;
 }
 
@@ -67,6 +69,72 @@ button {
   border-bottom: 4px solid var(--brand-green);
 }
 
+.site-topbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.site-topbar__inner {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: var(--content-max);
+  min-height: var(--topbar-height);
+  padding: 6px 32px;
+}
+
+.site-topbar__emergency {
+  color: var(--brand-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.site-topbar__emergency:hover {
+  color: var(--brand-green);
+}
+
+.site-topbar__langs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-topbar__lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 20px;
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0.72;
+  transition: opacity 0.15s ease, outline-color 0.15s ease;
+  outline: 1px solid transparent;
+  outline-offset: 1px;
+}
+
+.site-topbar__lang:hover,
+.site-topbar__lang.is-active {
+  opacity: 1;
+}
+
+.site-topbar__lang.is-active {
+  outline-color: var(--brand-green);
+}
+
+.site-topbar__lang svg {
+  display: block;
+  width: 28px;
+  height: 20px;
+}
+
 .site-header__bar {
   margin: 0 auto;
   display: flex;
@@ -75,7 +143,7 @@ button {
   gap: 24px;
   width: 100%;
   max-width: var(--content-max);
-  height: var(--header-height);
+  height: var(--nav-height);
   padding: 0 35px 0 32px;
 }
 
@@ -890,7 +958,7 @@ body.is-menu-open {
   width: 100%;
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 96px 32px 120px;
+  padding: 140px 32px 120px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -965,7 +1033,7 @@ body.is-menu-open {
   }
 
   .hero__inner {
-    padding: 180px 32px 160px;
+    padding: 220px 32px 160px;
   }
 
   .hero__title {

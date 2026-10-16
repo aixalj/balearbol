@@ -18,6 +18,28 @@
     }
   });
 
+  const emergencyPhone = String(config.emergencyPhone || "").trim();
+  if (emergencyPhone) {
+    const telHref = `tel:${emergencyPhone.replace(/[^\d+]/g, "")}`;
+    document.querySelectorAll("[data-emergency-phone]").forEach((link) => {
+      link.href = telHref;
+    });
+    document.querySelectorAll("[data-emergency-phone-label]").forEach((label) => {
+      label.textContent = emergencyPhone;
+    });
+  }
+
+  // Visual language switcher only — translations can hook into data-lang later
+  header.querySelectorAll("[data-lang]").forEach((button) => {
+    button.addEventListener("click", () => {
+      header.querySelectorAll("[data-lang]").forEach((other) => {
+        const active = other === button;
+        other.classList.toggle("is-active", active);
+        other.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    });
+  });
+
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
     document.body.classList.toggle("is-menu-open", open);
