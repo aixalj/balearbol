@@ -1681,7 +1681,7 @@ body.is-menu-open {
 
 .contact-emergency__text {
   margin: 0 0 20px;
-  color: rgba(30, 29, 34, 0.88);
+  color: var(--brand-black);
   font-size: 14px;
   line-height: 1.55;
 }
