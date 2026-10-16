@@ -39,7 +39,15 @@
     link.addEventListener("click", () => setOpen(false));
   });
 
+  const isContactPage = /contact\.html$/i.test(window.location.pathname);
+
   const setActiveFromHash = () => {
+    // On contact, leave section links inactive — only the quote CTA stays active.
+    if (isContactPage) {
+      navLinks.forEach((link) => link.classList.remove("is-active"));
+      return;
+    }
+
     const hash = window.location.hash || "#home";
     navLinks.forEach((link) => {
       const href = link.getAttribute("href") || "";
