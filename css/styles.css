@@ -406,10 +406,12 @@ button {
   color: var(--brand-green);
 }
 
-.mobile-nav .btn-contact {
+.mobile-nav .btn-contact,
+.mobile-nav .btn-contact.is-active {
   display: inline-flex;
   width: fit-content;
   margin-top: 8px;
+  color: var(--brand-black);
 }
 
 @media (min-width: 900px) {
