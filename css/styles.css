@@ -1769,7 +1769,7 @@ body.is-menu-open {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--brand-emergency);
+  color: var(--brand-white);
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
@@ -1777,7 +1777,7 @@ body.is-menu-open {
 }
 
 .contact-emergency__phone svg path {
-  stroke: currentColor;
+  stroke: var(--brand-green);
 }
 
 .contact-aside__photo {
