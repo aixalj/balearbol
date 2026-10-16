@@ -13,7 +13,7 @@
  * - Client Name, Phone Number, Email Address, Location Address,
  *   Services Needed (multiple select),
  *   Specific Hazard Issue, Tree Documentation Image (attachment),
- *   Payment Status (single select: Pending | Paid | Unpaid)
+ *   Payment Status (single select: Not Invoiced | …)
  * Submission Date should be a Created time field (auto — do not write).
  *
  * Services Needed options:
@@ -123,7 +123,7 @@ module.exports = async function handler(req, res) {
     "Email Address": email,
     "Location Address": address,
     "Specific Hazard Issue": issue,
-    "Payment Status": "Pending",
+    "Payment Status": "Not Invoiced",
     "Services Needed": services,
     "Tree Documentation Image": images.map((url) => ({ url })),
   };
