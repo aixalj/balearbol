@@ -351,7 +351,7 @@ button {
 .about-hero {
   flex: 1;
   background: var(--brand-page);
-  padding: 64px 24px;
+  padding: 48px 24px;
 }
 
 .about-hero__inner {
@@ -412,7 +412,7 @@ button {
   .about-hero {
     display: flex;
     align-items: center;
-    padding: 96px 32px;
+    padding: 72px 32px;
   }
 
   .about-hero__inner {
@@ -440,7 +440,7 @@ button {
 .standards {
   background: #1e1d22;
   color: #ffffff;
-  padding: 80px 24px 112px;
+  padding: 64px 24px 88px;
 }
 
 .standards__inner {
@@ -449,7 +449,7 @@ button {
   max-width: var(--content-max);
   display: flex;
   flex-direction: column;
-  gap: 72px;
+  gap: 56px;
 }
 
 /* —— About certifications —— */
@@ -579,11 +579,11 @@ button {
 
 @media (min-width: 900px) {
   .standards {
-    padding: 112px 32px 128px;
+    padding: 88px 32px 104px;
   }
 
   .standards__inner {
-    gap: 96px;
+    gap: 72px;
   }
 
   .about-certs {
@@ -632,7 +632,7 @@ button {
 /* —— About team —— */
 .about-team {
   background: var(--brand-page);
-  padding: 80px 24px;
+  padding: 64px 24px;
 }
 
 .about-team__inner {
@@ -759,7 +759,7 @@ button {
 
 @media (min-width: 768px) {
   .about-team {
-    padding: 120px 32px;
+    padding: 96px 32px;
   }
 
   .about-team__inner {
@@ -961,7 +961,7 @@ body.is-menu-open {
 /* —— Services —— */
 .services {
   background: var(--brand-page);
-  padding: 64px 24px 80px;
+  padding: 48px 24px 64px;
 }
 
 .services__inner {
@@ -1081,7 +1081,7 @@ body.is-menu-open {
 
 @media (min-width: 960px) {
   .services {
-    padding: 96px 32px;
+    padding: 72px 32px;
   }
 
   .services__inner {
@@ -1260,7 +1260,7 @@ body.is-menu-open {
 /* —— CTA Consultation —— */
 .cta {
   background: var(--brand-page);
-  padding: 64px 24px 80px;
+  padding: 48px 24px 64px;
 }
 
 .cta__panel {
@@ -1328,7 +1328,7 @@ body.is-menu-open {
 
 @media (min-width: 768px) {
   .cta {
-    padding: 96px 32px;
+    padding: 72px 32px;
   }
 
   .cta__panel {
@@ -2146,7 +2146,7 @@ body.is-menu-open {
 
 /* —— Instagram gallery (one-pager) —— */
 .instagram-gallery {
-  padding: 72px 24px;
+  padding: 56px 24px;
   background: var(--brand-page);
 }
 
@@ -2362,7 +2362,7 @@ body.is-menu-open {
 
 @media (min-width: 700px) {
   .instagram-gallery {
-    padding: 96px 32px;
+    padding: 72px 32px;
   }
 
   .instagram-gallery__title {
