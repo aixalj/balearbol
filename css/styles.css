@@ -1697,6 +1697,12 @@ body.is-menu-open {
   font-size: 28px;
   font-weight: 700;
   line-height: 1;
+  text-decoration: none;
+}
+
+.contact-emergency__phone span {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 .contact-emergency__phone:hover {
