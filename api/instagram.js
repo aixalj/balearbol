@@ -1,6 +1,6 @@
 /**
  * Vercel serverless function: GET /api/instagram
- * Returns recent Instagram media for the connected Business/Creator account.
+ * Returns the latest Instagram profile posts (same order as the IG grid).
  *
  * Required env var:
  * - INSTAGRAM_ACCESS_TOKEN (long-lived Instagram Graph / Basic Display token)
@@ -8,6 +8,55 @@
  * Optional:
  * - INSTAGRAM_USER_ID (defaults to "me" for Instagram Graph user token)
  */
+
+const POST_LIMIT = 12;
+
+function mapPost(item) {
+  const type = String(item.media_type || "");
+  const children = item.children?.data || [];
+  const productType = String(item.media_product_type || "").toUpperCase();
+  const isVideo =
+    type === "VIDEO" ||
+    type === "REELS" ||
+    productType === "REELS" ||
+    children.some(
+      (child) => child.media_type === "VIDEO" || child.media_type === "REELS"
+    );
+
+  let imageUrl = null;
+  let videoUrl = null;
+
+  if (type === "CAROUSEL_ALBUM" && children.length) {
+    // Instagram profile grid uses the first carousel slide as the cover.
+    const first = children[0];
+    imageUrl = first.thumbnail_url || first.media_url || null;
+    if (first.media_type === "VIDEO" || first.media_type === "REELS") {
+      videoUrl = first.media_url || null;
+      imageUrl = first.thumbnail_url || first.media_url || null;
+    }
+  } else if (type === "VIDEO" || type === "REELS" || productType === "REELS") {
+    // Prefer thumbnail for the grid (matches Instagram). media_url may be
+    // omitted for some Reels with licensed audio.
+    imageUrl = item.thumbnail_url || item.media_url || null;
+    videoUrl = item.media_url || null;
+  } else {
+    imageUrl = item.media_url || item.thumbnail_url || null;
+  }
+
+  if (!imageUrl && !videoUrl) return null;
+
+  return {
+    id: item.id,
+    caption: item.caption || "",
+    mediaType: type || "IMAGE",
+    isVideo,
+    childrenCount: type === "CAROUSEL_ALBUM" ? children.length : 0,
+    imageUrl: imageUrl || videoUrl,
+    videoUrl,
+    permalink: item.permalink,
+    timestamp: item.timestamp,
+  };
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,6 +85,7 @@ module.exports = async function handler(req, res) {
     "id",
     "caption",
     "media_type",
+    "media_product_type",
     "media_url",
     "thumbnail_url",
     "permalink",
@@ -43,9 +93,12 @@ module.exports = async function handler(req, res) {
     "children{media_type,media_url,thumbnail_url}",
   ].join(",");
 
-  const url = new URL(`https://graph.instagram.com/v21.0/${encodeURIComponent(userId)}/media`);
+  // Fetch a few extras so we still return 12 if any item maps poorly.
+  const url = new URL(
+    `https://graph.instagram.com/v21.0/${encodeURIComponent(userId)}/media`
+  );
   url.searchParams.set("fields", fields);
-  url.searchParams.set("limit", "12");
+  url.searchParams.set("limit", String(Math.min(POST_LIMIT + 6, 25)));
   url.searchParams.set("access_token", token);
 
   try {
@@ -61,49 +114,14 @@ module.exports = async function handler(req, res) {
     }
 
     const posts = (data.data || [])
-      .map((item) => {
-        const type = String(item.media_type || "");
-        const children = item.children?.data || [];
-        const isVideo =
-          type === "VIDEO" ||
-          type === "REELS" ||
-          children.some((child) => child.media_type === "VIDEO" || child.media_type === "REELS");
-
-        let imageUrl = item.thumbnail_url || item.media_url;
-        let videoUrl = null;
-
-        if (type === "VIDEO" || type === "REELS") {
-          imageUrl = item.thumbnail_url || item.media_url;
-          videoUrl = item.media_url || null;
-        } else if (type === "CAROUSEL_ALBUM" && children.length) {
-          const first = children[0];
-          const firstVideo = children.find(
-            (child) => child.media_type === "VIDEO" || child.media_type === "REELS"
-          );
-          imageUrl =
-            (firstVideo && (firstVideo.thumbnail_url || firstVideo.media_url)) ||
-            first.thumbnail_url ||
-            first.media_url;
-          videoUrl = firstVideo?.media_url || null;
-        } else {
-          imageUrl = item.media_url || item.thumbnail_url;
-        }
-
-        if (!imageUrl && !videoUrl) return null;
-
-        return {
-          id: item.id,
-          caption: item.caption || "",
-          mediaType: type,
-          isVideo,
-          childrenCount: type === "CAROUSEL_ALBUM" ? children.length : 0,
-          imageUrl: imageUrl || videoUrl,
-          videoUrl,
-          permalink: item.permalink,
-          timestamp: item.timestamp,
-        };
+      .map(mapPost)
+      .filter(Boolean)
+      .sort((a, b) => {
+        const ta = Date.parse(a.timestamp) || 0;
+        const tb = Date.parse(b.timestamp) || 0;
+        return tb - ta;
       })
-      .filter(Boolean);
+      .slice(0, POST_LIMIT);
 
     return res.status(200).json({ configured: true, posts });
   } catch (error) {

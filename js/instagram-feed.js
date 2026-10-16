@@ -195,7 +195,15 @@
       if (!response.ok) {
         throw new Error(data.error || "Could not load Instagram feed.");
       }
-      renderPosts(Array.isArray(data.posts) ? data.posts : []);
+      const posts = (Array.isArray(data.posts) ? data.posts : [])
+        .slice()
+        .sort((a, b) => {
+          const ta = Date.parse(a.timestamp) || 0;
+          const tb = Date.parse(b.timestamp) || 0;
+          return tb - ta;
+        })
+        .slice(0, 12);
+      renderPosts(posts);
     })
     .catch((error) => {
       setStatus(error.message || "Could not load Instagram feed.");
