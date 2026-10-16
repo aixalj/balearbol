@@ -1281,7 +1281,8 @@ body.is-menu-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
+  align-self: stretch;
+  width: 100%;
   margin-top: auto;
   padding: 10px 16px;
   border-radius: 8px;
@@ -1295,6 +1296,7 @@ body.is-menu-open {
   text-decoration: none;
   color: var(--brand-black);
   transition: opacity 0.15s ease;
+  box-sizing: border-box;
 }
 
 .service-card__cta:hover {
