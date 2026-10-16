@@ -699,8 +699,8 @@ button {
 }
 
 .team-member__photo {
-  width: 240px;
-  height: 240px;
+  width: 245px;
+  height: 245px;
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 50%;
@@ -801,8 +801,8 @@ button {
   }
 
   .team-member__photo {
-    width: 280px;
-    height: 280px;
+    width: 285px;
+    height: 285px;
   }
 }
 
