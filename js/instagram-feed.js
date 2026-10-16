@@ -6,7 +6,7 @@
   const username = String(config.instagramUsername || "").replace(/^@/, "").trim();
   const profileLinks = document.querySelectorAll("[data-instagram-profile]");
   const apiUrl = config.instagramApiUrl || "/api/instagram";
-  const avatarUrl = "assets/brand/logo-green.png";
+  const avatarUrl = "assets/brand/logo-green.jpg";
 
   if (username) {
     const href = `https://www.instagram.com/${encodeURIComponent(username)}/`;

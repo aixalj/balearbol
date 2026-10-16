@@ -2410,8 +2410,9 @@ body.is-menu-open {
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center;
   flex-shrink: 0;
-  background: #ffffff;
+  background: #000000;
   box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.9);
 }
 
