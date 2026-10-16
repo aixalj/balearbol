@@ -813,11 +813,6 @@ button {
     content: "";
     flex: 0 0 24px;
   }
-
-  .about-certs__dots {
-    display: flex;
-    padding: 0 24px;
-  }
 }
 
 /* —— About team —— */
@@ -1285,8 +1280,11 @@ body.is-menu-open {
     scroll-snap-align: start;
   }
 
-  .services__dots {
+  .services__dots,
+  .about-certs__dots {
     display: flex;
+    justify-content: center;
+    gap: 8px;
     padding: 0 24px;
   }
 }
