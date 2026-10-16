@@ -601,6 +601,10 @@ button {
     gap: 48px;
   }
 
+  .about-certs__title {
+    white-space: nowrap;
+  }
+
   .about-certs__protocol {
     flex-shrink: 0;
   }
