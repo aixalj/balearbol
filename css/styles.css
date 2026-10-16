@@ -189,7 +189,7 @@ button {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
 }
 
 .site-nav a {
