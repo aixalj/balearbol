@@ -436,24 +436,29 @@ button {
   }
 }
 
-/* —— Standards (certs + equipment) —— */
+/* —— Standards (certs + equipment, shared dark band) —— */
 .standards {
-  display: block;
+  background: #1e1d22;
+  color: #ffffff;
+  padding: 80px 24px 112px;
+}
+
+.standards__inner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--content-max);
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
 }
 
 /* —— About certifications —— */
 .about-certs {
-  background: var(--brand-page);
-  padding: 80px 24px;
-}
-
-.about-certs__inner {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 48px;
-  width: 100%;
-  max-width: var(--content-max);
+  background: transparent;
+  padding: 0;
 }
 
 .about-certs__header {
@@ -476,12 +481,12 @@ button {
   font-size: clamp(32px, 6vw, 48px);
   font-weight: 400;
   line-height: 1;
-  color: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .about-certs__text {
   margin: 0;
-  color: var(--brand-black);
+  color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 400;
@@ -540,7 +545,8 @@ button {
 }
 
 .cert-card--dark {
-  background: var(--brand-black);
+  background: #2a292f;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .cert-card--accent {
@@ -638,12 +644,16 @@ button {
 }
 
 @media (min-width: 900px) {
-  .about-certs {
-    padding: 128px 32px;
+  .standards {
+    padding: 112px 32px 128px;
   }
 
-  .about-certs__inner {
-    gap: 80px;
+  .standards__inner {
+    gap: 96px;
+  }
+
+  .about-certs {
+    gap: 64px;
   }
 
   .about-certs__header {
@@ -1160,18 +1170,14 @@ body.is-menu-open {
 
 /* —— Equipment Standards —— */
 .equipment {
-  background: #1e1d22;
-  padding: 80px 24px 112px;
-  color: #ffffff;
-}
-
-.equipment__inner {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  background: transparent;
+  padding: 0;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 64px;
 }
 
 .equipment__copy {
@@ -1303,14 +1309,11 @@ body.is-menu-open {
 
 @media (min-width: 960px) {
   .equipment {
-    padding: 96px 32px;
-  }
-
-  .equipment__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
+    padding-top: 80px;
   }
 
   .equipment__copy {
