@@ -2474,9 +2474,3 @@ body.is-menu-open {
     gap: 16px;
   }
 }
-
-@media (min-width: 1100px) {
-  .instagram-gallery__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
