@@ -648,7 +648,8 @@ button {
 }
 
 .team-member__photo {
-  width: 100%;
+  width: 50%;
+  max-width: 220px;
   overflow: hidden;
   border-radius: 12px;
   background: #e9f0e4;
