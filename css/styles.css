@@ -3,7 +3,7 @@
   --brand-green: #c1cc6c;
   --brand-white: #ffffff;
   --brand-muted: #d6d3d1;
-  --brand-page: #fcf8fd;
+  --brand-page: #f6faf2;
   --font-display: "Work Sans", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, sans-serif;
   --topbar-height: 38px;
@@ -342,7 +342,7 @@ button {
 /* —— About hero —— */
 .about-hero {
   flex: 1;
-  background: #f6faf2;
+  background: var(--brand-page);
   padding: 64px 24px;
 }
 
@@ -426,7 +426,7 @@ button {
 
 /* —— About certifications —— */
 .about-certs {
-  background: #f6faf2;
+  background: var(--brand-page);
   padding: 80px 24px;
 }
 
@@ -661,7 +661,7 @@ button {
 
 /* —— About team —— */
 .about-team {
-  background: var(--brand-white);
+  background: var(--brand-page);
   padding: 80px 24px;
 }
 
@@ -891,7 +891,7 @@ body.is-menu-open {
   bottom: -1px;
   width: 34%;
   height: 72px;
-  background: var(--brand-white);
+  background: var(--brand-page);
   clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
   transform: skewX(-8deg);
   transform-origin: bottom right;
@@ -990,7 +990,7 @@ body.is-menu-open {
 
 /* —— Services —— */
 .services {
-  background: #ffffff;
+  background: var(--brand-page);
   padding: 64px 24px 80px;
 }
 
@@ -1033,8 +1033,9 @@ body.is-menu-open {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #f6f5f3;
+  background: var(--brand-white);
   color: #1e1d22;
+  border-radius: 12px;
 }
 
 .service-card__media {
@@ -1319,7 +1320,7 @@ body.is-menu-open {
 
 /* —— CTA Consultation —— */
 .cta {
-  background: #ffffff;
+  background: var(--brand-page);
   padding: 64px 24px 80px;
 }
 
@@ -1433,7 +1434,7 @@ body.is-menu-open {
 
 /* —— Contact page —— */
 .contact-page {
-  background: #f6faf2;
+  background: var(--brand-page);
   padding: 64px 24px 96px;
 }
 
