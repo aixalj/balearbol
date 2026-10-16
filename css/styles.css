@@ -1648,8 +1648,9 @@ body.is-menu-open {
 }
 
 .contact-form__status.is-success {
-  background: rgba(193, 204, 108, 0.18);
-  color: var(--brand-green);
+  background: var(--brand-green);
+  color: var(--brand-black);
+  font-weight: 600;
 }
 
 .contact-form__submit {

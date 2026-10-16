@@ -215,7 +215,10 @@
       selectedFiles = [];
       renderPreviews();
       resetTurnstile();
-      setStatus("Request submitted. Our team will review your documentation shortly.", "success");
+      setStatus(
+        "Thanks — we’ve got your request. We’ll take a look at the details and get back to you soon.",
+        "success"
+      );
     } catch (error) {
       resetTurnstile();
       setStatus(error.message || "Something went wrong.", "error");
