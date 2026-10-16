@@ -1653,8 +1653,8 @@ body.is-menu-open {
 }
 
 .contact-form__status.is-success {
-  background: var(--brand-green);
-  color: var(--brand-black);
+  background: color-mix(in srgb, var(--brand-green) 35%, transparent);
+  color: var(--brand-green);
   font-weight: 600;
 }
 
