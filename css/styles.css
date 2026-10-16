@@ -1787,15 +1787,14 @@ body.is-menu-open {
   }
 
   .contact-page__header {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 48px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
     margin-bottom: 48px;
   }
 
   .contact-page__intro {
-    max-width: 420px;
+    max-width: 40em;
     text-align: left;
   }
 
