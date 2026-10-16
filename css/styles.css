@@ -1857,8 +1857,9 @@ body.is-menu-open {
 .site-footer__location {
   margin: 0;
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;
@@ -1871,6 +1872,8 @@ body.is-menu-open {
   width: 16px;
   height: 20px;
   flex-shrink: 0;
+  padding-bottom: 6px;
+  box-sizing: content-box;
 }
 
 .site-footer__nav {
@@ -1947,6 +1950,15 @@ body.is-menu-open {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 32px;
     align-items: start;
+  }
+
+  .site-footer__nav {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    column-gap: 40px;
+    row-gap: 8px;
   }
 }
 
