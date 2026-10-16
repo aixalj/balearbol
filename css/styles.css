@@ -705,7 +705,7 @@ button {
   }
 }
 
-/* Mobile: swipeable cert cards with next-card peek */
+/* Mobile: swipeable cert cards — full-bleed, next card peeks from screen edge */
 @media (max-width: 699px) {
   .standards {
     padding-left: 0;
@@ -714,9 +714,15 @@ button {
   }
 
   .standards__inner {
-    padding: 0 24px;
+    padding: 0;
     min-width: 0;
     max-width: 100%;
+  }
+
+  .about-certs__header,
+  .equipment {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .about-certs__carousel {
@@ -727,12 +733,13 @@ button {
 
   .about-certs__grid {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 24px;
-    padding: 2px 24px 4px;
+    scroll-padding-left: 24px;
+    scroll-padding-right: 24px;
+    padding: 4px 0 8px 24px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
@@ -744,9 +751,17 @@ button {
   }
 
   .cert-card {
-    flex: 0 0 min(78%, 280px);
-    width: min(78%, 280px);
+    /* Leave room so the next card peeks in from the right viewport edge */
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    max-width: none;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .about-certs__grid::after {
+    content: "";
+    flex: 0 0 24px;
   }
 
   .about-certs__dots {
