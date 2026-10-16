@@ -80,8 +80,20 @@
       return;
     }
 
+    const carousel = document.createElement("div");
+    carousel.className = "instagram-gallery__carousel";
+    carousel.dataset.instagramCarousel = "";
+
     const grid = document.createElement("div");
     grid.className = "instagram-gallery__grid";
+    grid.dataset.instagramTrack = "";
+
+    const dots = document.createElement("div");
+    dots.className = "instagram-gallery__dots";
+    dots.dataset.instagramDots = "";
+    dots.setAttribute("role", "tablist");
+    dots.setAttribute("aria-label", "Instagram posts");
+
     const handle = username || "instagram";
     const displayHandle =
       handle.length > 18 ? `${handle.slice(0, 16)}…` : handle;
@@ -162,7 +174,18 @@
       grid.appendChild(link);
     });
 
-    feed.replaceChildren(grid);
+    carousel.append(grid, dots);
+    feed.replaceChildren(carousel);
+
+    if (typeof window.initScrollCarousel === "function") {
+      window.initScrollCarousel({
+        root: carousel,
+        track: grid,
+        dots,
+        cards: ".instagram-gallery__item",
+        label: "Go to Instagram post",
+      });
+    }
   };
 
   const renderSetupHint = () => {

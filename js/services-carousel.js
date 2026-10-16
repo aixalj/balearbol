@@ -1,19 +1,34 @@
 (() => {
   /**
+   * @param {string|Element|null|undefined} value
+   * @param {ParentNode} [scope]
+   * @returns {Element|null}
+   */
+  const resolve = (value, scope) => {
+    if (!value) return null;
+    if (typeof value !== "string") return value;
+    return (scope || document).querySelector(value);
+  };
+
+  /**
    * @param {{
-   *   root: string,
-   *   track: string,
-   *   dots: string,
+   *   root: string|Element,
+   *   track: string|Element,
+   *   dots: string|Element,
    *   cards: string,
    *   label: string,
    *   maxWidth?: number,
    * }} options
    */
-  const initCarousel = ({ root, track, dots, cards, label, maxWidth = 699 }) => {
-    const carousel = document.querySelector(root);
-    const trackEl = carousel?.querySelector(track) || document.querySelector(track);
-    const dotsHost = carousel?.querySelector(dots) || document.querySelector(dots);
+  const initScrollCarousel = ({ root, track, dots, cards, label, maxWidth = 699 }) => {
+    const carousel = resolve(root);
+    const trackEl = resolve(track, carousel || undefined) || resolve(track);
+    const dotsHost = resolve(dots, carousel || undefined) || resolve(dots);
     if (!carousel || !trackEl || !dotsHost) return;
+
+    // Avoid double-binding the same track
+    if (trackEl.dataset.carouselReady === "true") return;
+    trackEl.dataset.carouselReady = "true";
 
     const cardEls = [...trackEl.querySelectorAll(cards)];
     if (cardEls.length < 2) return;
@@ -89,7 +104,9 @@
     syncMode();
   };
 
-  initCarousel({
+  window.initScrollCarousel = initScrollCarousel;
+
+  initScrollCarousel({
     root: "[data-services-carousel]",
     track: "[data-services-track]",
     dots: "[data-services-dots]",
@@ -97,7 +114,7 @@
     label: "Go to service",
   });
 
-  initCarousel({
+  initScrollCarousel({
     root: "[data-certs-carousel]",
     track: "[data-certs-track]",
     dots: "[data-certs-dots]",
