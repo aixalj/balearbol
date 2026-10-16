@@ -39,11 +39,12 @@
     link.addEventListener("click", () => setOpen(false));
   });
 
-  const isContactPage = /contact\.html$/i.test(window.location.pathname);
+  // Prefer DOM markers over pathname — Vercel may serve /contact without .html
+  const isOnePager = Boolean(document.getElementById("home"));
+  const isContactPage = Boolean(document.querySelector(".contact-page"));
 
   const setActiveFromHash = () => {
-    // On contact, leave section links inactive — only the quote CTA stays active.
-    if (isContactPage) {
+    if (isContactPage || !isOnePager) {
       navLinks.forEach((link) => link.classList.remove("is-active"));
       return;
     }
