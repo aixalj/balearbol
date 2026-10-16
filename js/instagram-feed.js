@@ -23,6 +23,14 @@
     feed.innerHTML = `<p class="instagram-gallery__status">${message}</p>`;
   };
 
+  const playIcon = `
+    <span class="instagram-gallery__play" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M8.5 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/>
+      </svg>
+    </span>
+  `;
+
   const renderPosts = (posts) => {
     if (!posts.length) {
       setStatus(
@@ -37,23 +45,53 @@
     grid.className = "instagram-gallery__grid";
 
     posts.forEach((post) => {
+      const isVideo = Boolean(post.isVideo || post.mediaType === "VIDEO" || post.mediaType === "REELS");
       const link = document.createElement("a");
-      link.className = "instagram-gallery__item";
+      link.className = "instagram-gallery__item" + (isVideo ? " is-video" : "");
       link.href = post.permalink || (username ? `https://www.instagram.com/${username}/` : "#");
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.setAttribute(
         "aria-label",
-        post.caption ? post.caption.slice(0, 120) : "View Instagram post"
+        post.caption
+          ? post.caption.slice(0, 120)
+          : isVideo
+            ? "Play Instagram video"
+            : "View Instagram post"
       );
 
-      const img = document.createElement("img");
-      img.src = post.imageUrl;
-      img.alt = post.caption ? post.caption.slice(0, 120) : "Instagram post";
-      img.loading = "lazy";
-      img.width = 600;
-      img.height = 600;
-      link.appendChild(img);
+      if (isVideo && post.videoUrl) {
+        const video = document.createElement("video");
+        video.className = "instagram-gallery__media";
+        video.src = post.videoUrl;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        video.setAttribute("poster", post.imageUrl || "");
+        link.appendChild(video);
+
+        link.addEventListener("mouseenter", () => {
+          video.play().catch(() => {});
+        });
+        link.addEventListener("mouseleave", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      } else {
+        const img = document.createElement("img");
+        img.className = "instagram-gallery__media";
+        img.src = post.imageUrl;
+        img.alt = post.caption ? post.caption.slice(0, 120) : "Instagram post";
+        img.loading = "lazy";
+        img.width = 600;
+        img.height = 600;
+        link.appendChild(img);
+      }
+
+      if (isVideo) {
+        link.insertAdjacentHTML("beforeend", playIcon);
+      }
 
       grid.appendChild(link);
     });

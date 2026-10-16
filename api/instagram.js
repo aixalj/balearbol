@@ -40,6 +40,7 @@ module.exports = async function handler(req, res) {
     "thumbnail_url",
     "permalink",
     "timestamp",
+    "children{media_type,media_url,thumbnail_url}",
   ].join(",");
 
   const url = new URL(`https://graph.instagram.com/v21.0/${encodeURIComponent(userId)}/media`);
@@ -61,16 +62,42 @@ module.exports = async function handler(req, res) {
 
     const posts = (data.data || [])
       .map((item) => {
-        const imageUrl =
-          item.media_type === "VIDEO" || item.media_type === "REELS"
-            ? item.thumbnail_url || item.media_url
-            : item.media_url;
-        if (!imageUrl) return null;
+        const type = String(item.media_type || "");
+        const children = item.children?.data || [];
+        const isVideo =
+          type === "VIDEO" ||
+          type === "REELS" ||
+          children.some((child) => child.media_type === "VIDEO" || child.media_type === "REELS");
+
+        let imageUrl = item.thumbnail_url || item.media_url;
+        let videoUrl = null;
+
+        if (type === "VIDEO" || type === "REELS") {
+          imageUrl = item.thumbnail_url || item.media_url;
+          videoUrl = item.media_url || null;
+        } else if (type === "CAROUSEL_ALBUM" && children.length) {
+          const first = children[0];
+          const firstVideo = children.find(
+            (child) => child.media_type === "VIDEO" || child.media_type === "REELS"
+          );
+          imageUrl =
+            (firstVideo && (firstVideo.thumbnail_url || firstVideo.media_url)) ||
+            first.thumbnail_url ||
+            first.media_url;
+          videoUrl = firstVideo?.media_url || null;
+        } else {
+          imageUrl = item.media_url || item.thumbnail_url;
+        }
+
+        if (!imageUrl && !videoUrl) return null;
+
         return {
           id: item.id,
           caption: item.caption || "",
-          mediaType: item.media_type,
-          imageUrl,
+          mediaType: type,
+          isVideo,
+          imageUrl: imageUrl || videoUrl,
+          videoUrl,
           permalink: item.permalink,
           timestamp: item.timestamp,
         };
