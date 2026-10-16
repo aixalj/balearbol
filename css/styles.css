@@ -1666,13 +1666,14 @@ body.is-menu-open {
 .contact-emergency {
   padding: 28px 24px;
   border-radius: 16px;
-  background: var(--brand-black);
+  background: var(--brand-emergency);
+  color: var(--brand-black);
   flex-shrink: 0;
 }
 
 .contact-emergency__title {
   margin: 0 0 12px;
-  color: var(--brand-emergency);
+  color: var(--brand-black);
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 700;
@@ -1680,24 +1681,31 @@ body.is-menu-open {
 
 .contact-emergency__text {
   margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(30, 29, 34, 0.88);
   font-size: 14px;
   line-height: 1.55;
 }
 
-.contact-emergency__phone {
+.contact-emergency__phone,
+.contact-emergency__phone:link,
+.contact-emergency__phone:visited {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--brand-white);
+  color: var(--brand-black);
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
   line-height: 1;
 }
 
+.contact-emergency__phone:hover {
+  color: var(--brand-black);
+  opacity: 0.85;
+}
+
 .contact-emergency__phone svg path {
-  stroke: var(--brand-green);
+  stroke: currentColor;
 }
 
 .contact-aside__photo {
