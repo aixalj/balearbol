@@ -23,6 +23,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 12px);
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 [id] {
@@ -39,6 +41,8 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 img {
@@ -63,11 +67,13 @@ button {
 /* —— Header —— */
 .site-header {
   background: var(--brand-black);
+  max-width: 100%;
 }
 
 .site-topbar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   background: var(--brand-black);
+  max-width: 100%;
 }
 
 .site-header__sticky {
@@ -76,6 +82,8 @@ button {
   left: 0;
   right: 0;
   z-index: 50;
+  width: 100%;
+  max-width: 100%;
   background: color-mix(in srgb, var(--brand-black) 95%, transparent);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -101,6 +109,34 @@ button {
     transform: none;
     pointer-events: auto;
     transition: none;
+  }
+
+  .site-topbar__inner {
+    gap: 10px;
+    padding: 6px 16px;
+    min-width: 0;
+  }
+
+  .site-topbar__emergency,
+  .site-topbar__emergency:link,
+  .site-topbar__emergency:visited {
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: 12px;
+    gap: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .site-topbar__langs {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .site-header__bar {
+    gap: 12px;
+    padding: 0 16px;
+    min-width: 0;
   }
 }
 
@@ -674,15 +710,19 @@ button {
   .standards {
     padding-left: 0;
     padding-right: 0;
+    overflow-x: clip;
   }
 
   .standards__inner {
     padding: 0 24px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .about-certs__carousel {
-    margin-inline: -24px;
-    width: calc(100% + 48px);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .about-certs__grid {
@@ -696,6 +736,7 @@ button {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
+    max-width: 100%;
   }
 
   .about-certs__grid::-webkit-scrollbar {
@@ -911,6 +952,7 @@ body.is-menu-open {
   align-items: center;
   min-height: min(100svh, 56rem);
   overflow: clip;
+  max-width: 100%;
   color: var(--brand-white);
 }
 
@@ -1138,10 +1180,16 @@ body.is-menu-open {
   .services {
     padding-left: 0;
     padding-right: 0;
+    overflow-x: clip;
   }
 
   .services__header {
     padding: 0 24px;
+  }
+
+  .services__carousel {
+    min-width: 0;
+    max-width: 100%;
   }
 
   .services__grid {
@@ -1155,6 +1203,7 @@ body.is-menu-open {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
+    max-width: 100%;
   }
 
   .services__grid::-webkit-scrollbar {
@@ -2195,8 +2244,8 @@ a.site-footer__heading:hover {
   scroll-padding-inline: 24px;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 8px;
-  margin-inline: -24px;
   padding-inline: 24px;
+  max-width: 100%;
 }
 
 .gallery-grid::-webkit-scrollbar {
@@ -2492,18 +2541,24 @@ a.site-footer__heading:hover {
   .instagram-gallery {
     padding-left: 0;
     padding-right: 0;
+    overflow-x: clip;
   }
 
   .instagram-gallery__inner {
     gap: 24px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .instagram-gallery__header {
     padding: 0 24px;
   }
 
-  .instagram-gallery__feed {
+  .instagram-gallery__feed,
+  .instagram-gallery__carousel {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .instagram-gallery__grid {
@@ -2517,6 +2572,7 @@ a.site-footer__heading:hover {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
+    max-width: 100%;
   }
 
   .instagram-gallery__grid::-webkit-scrollbar {
