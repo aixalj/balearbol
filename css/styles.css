@@ -503,7 +503,7 @@ button {
   color: var(--brand-black);
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1133,7 +1133,7 @@ body.is-menu-open {
 }
 
 .equipment__title-accent {
-  color: #c1cc6c;
+  color: #ffffff;
 }
 
 .equipment__lead {
@@ -1162,13 +1162,14 @@ body.is-menu-open {
   gap: 12px;
   background: rgba(255, 255, 255, 0.05);
   padding: 16px;
+  border-radius: 8px;
 }
 
 .equipment__spec-label {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 16px;
+  line-height: 20px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #ffffff;
@@ -1176,9 +1177,9 @@ body.is-menu-open {
 
 .equipment__spec-value {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
   color: #c1cc6c;
 }
 
