@@ -7,6 +7,9 @@
   --brand-emergency: #f25555;
   --font-display: "Work Sans", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, sans-serif;
+  --section-title-size: clamp(36px, 6vw, 48px);
+  --section-title-weight: 700;
+  --section-title-line: 1.1;
   --topbar-height: 38px;
   --nav-height: 99px;
   /* Sticky nav only — topbar scrolls away */
@@ -409,9 +412,10 @@ button {
 .mobile-nav .btn-contact,
 .mobile-nav .btn-contact.is-active {
   display: inline-flex;
-  width: fit-content;
+  width: 100%;
   margin-top: 8px;
   color: var(--brand-black);
+  box-sizing: border-box;
 }
 
 @media (min-width: 900px) {
@@ -575,9 +579,11 @@ button {
 .about-certs__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(32px, 6vw, 48px);
-  font-weight: 400;
-  line-height: 1;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
+  letter-spacing: normal;
+  text-transform: none;
   color: var(--brand-white);
 }
 
@@ -753,6 +759,22 @@ button {
     padding-right: 24px;
   }
 
+  .about-certs__header {
+    align-items: stretch;
+  }
+
+  .about-certs__protocol {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .equipment__cta {
+    width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+
   .about-certs__carousel {
     width: 100%;
     max-width: 100%;
@@ -817,9 +839,11 @@ button {
 .about-team__heading {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 48px);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
+  letter-spacing: normal;
+  text-transform: none;
   color: #173124;
   text-align: center;
 }
@@ -1154,9 +1178,9 @@ body.is-menu-open {
 .services__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 48px);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
   letter-spacing: normal;
   text-transform: none;
   color: #173124;
@@ -1386,9 +1410,11 @@ body.is-menu-open {
 .equipment__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 40px);
-  font-weight: 700;
-  line-height: 1.15;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
+  letter-spacing: normal;
+  text-transform: none;
   color: #ffffff;
 }
 
@@ -1556,9 +1582,11 @@ body.is-menu-open {
   margin: 0;
   max-width: 22ch;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 7vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.15;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
+  letter-spacing: normal;
+  text-transform: none;
   color: #1e1d22;
 }
 
@@ -1594,6 +1622,14 @@ body.is-menu-open {
   opacity: 0.9;
 }
 
+@media (max-width: 767px) {
+  .cta__button {
+    width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+}
+
 @media (min-width: 768px) {
   .cta {
     padding: 72px 32px;
@@ -1609,8 +1645,6 @@ body.is-menu-open {
 
   .cta__title {
     max-width: none;
-    font-size: 60px;
-    line-height: 60px;
   }
 
   .cta__lead {
@@ -2513,9 +2547,11 @@ a.site-footer__heading:hover {
 .instagram-gallery__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: var(--section-title-line);
+  letter-spacing: normal;
+  text-transform: none;
   color: var(--brand-black);
 }
 
