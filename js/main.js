@@ -2,9 +2,21 @@
   const header = document.querySelector("[data-site-header]");
   if (!header) return;
 
+  const config = window.BALEARBOL_CONFIG || {};
   const toggle = header.querySelector("[data-menu-toggle]");
-  const mobileNav = header.querySelector("#mobile-nav");
-  const navLinks = header.querySelectorAll('.site-nav a[href^="#"], .mobile-nav a[href^="#"]');
+  const navLinks = header.querySelectorAll(
+    '.site-nav a[href*="#"], .mobile-nav a[href*="#"]'
+  );
+
+  const facebookUrl = String(config.facebookUrl || "").trim();
+  document.querySelectorAll("[data-facebook-link]").forEach((link) => {
+    if (facebookUrl) {
+      link.href = facebookUrl;
+      link.hidden = false;
+    } else {
+      link.hidden = true;
+    }
+  });
 
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
@@ -30,8 +42,9 @@
   const setActiveFromHash = () => {
     const hash = window.location.hash || "#home";
     navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      link.classList.toggle("is-active", href === hash);
+      const href = link.getAttribute("href") || "";
+      const linkHash = href.includes("#") ? `#${href.split("#")[1]}` : "";
+      link.classList.toggle("is-active", linkHash === hash);
     });
   };
 
