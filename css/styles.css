@@ -1866,12 +1866,14 @@ body.is-menu-open {
   line-height: 1.4;
   color: #d6d3d1;
   text-decoration: none;
-  transition: opacity 0.15s ease;
+  cursor: pointer;
+  transition: opacity 0.15s ease, color 0.15s ease;
 }
 
-.site-footer__location:hover {
-  opacity: 0.8;
-  color: #d6d3d1;
+.site-footer__location:hover,
+.site-footer__location:focus-visible {
+  opacity: 1;
+  color: var(--brand-green);
 }
 
 .site-footer__pin {
