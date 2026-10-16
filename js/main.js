@@ -82,36 +82,38 @@
   window.addEventListener("hashchange", setActiveFromHash);
   setActiveFromHash();
 
-  // Hide sticky nav on scroll down; show on scroll up
+  // Fixed nav: sit below topbar at page top; hide on scroll down, show on scroll up
   const sticky = header.querySelector(".site-header__sticky");
+  const topbar = header.querySelector(".site-topbar");
   if (sticky) {
-    let lastY = window.scrollY;
-    let hidden = false;
-    const topReveal = 24;
+    let lastY = Math.max(0, window.scrollY || 0);
 
-    const setHidden = (next) => {
-      if (hidden === next) return;
-      hidden = next;
-      sticky.classList.toggle("is-hidden", next);
+    const syncPin = (y) => {
+      const topbarH = topbar ? topbar.offsetHeight : 0;
+      sticky.style.top = `${Math.max(0, topbarH - y)}px`;
     };
 
     const onScroll = () => {
-      const y = Math.max(0, window.scrollY);
+      const y = Math.max(0, window.scrollY || 0);
       const delta = y - lastY;
       const menuOpen = header.classList.contains("is-open");
 
-      if (menuOpen || y <= topReveal) {
-        setHidden(false);
-      } else if (delta > 4) {
-        setHidden(true);
-      } else if (delta < -4) {
-        setHidden(false);
+      syncPin(y);
+
+      if (menuOpen || y < 16) {
+        sticky.classList.remove("is-hidden");
+      } else if (delta > 1) {
+        sticky.classList.add("is-hidden");
+      } else if (delta < -1) {
+        sticky.classList.remove("is-hidden");
       }
 
       lastY = y;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    window.addEventListener("resize", () => syncPin(Math.max(0, window.scrollY || 0)));
+    syncPin(lastY);
+    sticky.classList.remove("is-hidden");
   }
 })();

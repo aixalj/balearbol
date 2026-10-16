@@ -71,19 +71,28 @@ button {
 }
 
 .site-header__sticky {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   background: color-mix(in srgb, var(--brand-black) 95%, transparent);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 4px solid var(--brand-green);
-  transition: top 0.28s ease;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.28s ease;
 }
 
 .site-header__sticky.is-hidden {
-  top: calc(-1 * (var(--nav-height) + 8px));
+  transform: translate3d(0, -100%, 0);
   pointer-events: none;
+}
+
+/* Keeps layout space while the nav is position: fixed */
+.site-header__nav-slot {
+  height: calc(var(--nav-height) + 4px);
+  background: var(--brand-black);
 }
 
 @media (prefers-reduced-motion: reduce) {
