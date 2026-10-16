@@ -339,6 +339,8 @@ button {
   font-size: 15px;
   font-weight: 700;
   line-height: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--brand-black);
   transition: opacity 0.15s ease;
   white-space: nowrap;
@@ -352,13 +354,15 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   margin-left: auto;
 }
 
 .menu-toggle svg {
   display: block;
+  width: 24px;
+  height: 24px;
 }
 
 .menu-toggle .icon-close {
@@ -960,6 +964,8 @@ body.is-menu-open {
   font-size: 18px;
   font-weight: 700;
   line-height: 28px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   transition: opacity 0.15s ease, background-color 0.15s ease;
 }
 
@@ -1313,8 +1319,8 @@ body.is-menu-open {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0;
-  text-transform: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
   color: var(--brand-black);
   transition: opacity 0.15s ease;
@@ -2141,6 +2147,8 @@ body.is-menu-open {
 
 .site-footer__nav a.site-footer__quote {
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .site-footer__contact {
