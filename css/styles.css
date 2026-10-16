@@ -82,8 +82,8 @@ button {
 .site-logo {
   position: relative;
   flex-shrink: 0;
-  width: 90px;
-  height: 82px;
+  width: 72px;
+  height: 72px;
 }
 
 .site-logo img {
@@ -1859,7 +1859,7 @@ body.is-menu-open {
 .site-footer__logo {
   display: block;
   width: 90px;
-  height: 82px;
+  height: 90px;
   flex-shrink: 0;
 }
 
