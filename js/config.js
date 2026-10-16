@@ -12,4 +12,4 @@ window.BALEARBOL_CONFIG = {
   contactApiUrl: "/api/contact",
   maxFiles: 6,
   maxFileBytes: 50 * 1024 * 1024,
-};
+}; 
