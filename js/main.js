@@ -162,11 +162,12 @@
     navLinks.forEach((link) => link.classList.remove("is-active"));
   }
 
-  // Fixed nav: sit below topbar at page top; hide on scroll down, show on scroll up
+  // Fixed nav: sit below topbar at page top; hide on scroll down, show on scroll up (desktop only)
   const sticky = header.querySelector(".site-header__sticky");
   const topbar = header.querySelector(".site-topbar");
   if (sticky) {
     let lastY = Math.max(0, window.scrollY || 0);
+    const desktopMq = window.matchMedia("(min-width: 900px)");
 
     const syncPin = (y) => {
       const topbarH = topbar ? topbar.offsetHeight : 0;
@@ -180,6 +181,13 @@
 
       syncPin(y);
 
+      // Mobile: keep header always visible (no hide-on-scroll)
+      if (!desktopMq.matches) {
+        sticky.classList.remove("is-hidden");
+        lastY = y;
+        return;
+      }
+
       if (menuOpen || y < 16) {
         sticky.classList.remove("is-hidden");
       } else if (delta > 1) {
@@ -192,7 +200,10 @@
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => syncPin(Math.max(0, window.scrollY || 0)));
+    window.addEventListener("resize", () => {
+      syncPin(Math.max(0, window.scrollY || 0));
+      if (!desktopMq.matches) sticky.classList.remove("is-hidden");
+    });
     syncPin(lastY);
     sticky.classList.remove("is-hidden");
   }

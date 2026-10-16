@@ -95,6 +95,15 @@ button {
   background: var(--brand-black);
 }
 
+@media (max-width: 899px) {
+  .site-header__sticky,
+  .site-header__sticky.is-hidden {
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-header__sticky {
     transition: none;
