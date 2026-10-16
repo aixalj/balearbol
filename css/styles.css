@@ -1091,21 +1091,28 @@ body.is-menu-open {
 }
 
 .service-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
   margin-top: auto;
-  padding-top: 4px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--brand-green);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
   text-decoration: none;
-  color: #1e1d22;
-  border-bottom: 0;
+  color: var(--brand-black);
+  transition: opacity 0.15s ease;
 }
 
 .service-card__cta:hover {
-  color: #6f7a2e;
+  opacity: 0.9;
+  color: var(--brand-black);
 }
 
 @media (min-width: 700px) {
