@@ -10,6 +10,19 @@ python3 -m http.server 3000
 
 Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
+## SEO / production domain
+
+Canonical URLs, Open Graph tags, `robots.txt`, and `sitemap.xml` assume:
+
+`https://balearbol.com`
+
+If the live domain differs, update that origin in:
+
+- `index.html` / `contact.html` (canonical, og:url, og:image, JSON-LD)
+- `js/config.js` → `siteOrigin`
+- `robots.txt`
+- `sitemap.xml`
+
 ## Structure
 
 ```
