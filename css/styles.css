@@ -96,7 +96,7 @@ button {
   display: none;
   align-items: center;
   justify-content: flex-end;
-  gap: 28px;
+  gap: 48px;
   margin-left: auto;
   min-width: 0;
 }
