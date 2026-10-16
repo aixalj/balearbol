@@ -1110,13 +1110,10 @@ body.is-menu-open {
   background: transparent;
   padding: 0;
   color: #ffffff;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 64px;
 }
 
 .equipment__copy {
-  border-left: 2px solid #c1cc6c;
-  padding: 16px 0 16px 28px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1125,14 +1122,13 @@ body.is-menu-open {
 .equipment__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: clamp(32px, 5vw, 40px);
   font-weight: 700;
-  line-height: 40px;
+  line-height: 1.15;
   color: #ffffff;
 }
 
 .equipment__title-accent {
-  display: block;
   color: #c1cc6c;
 }
 
@@ -1185,7 +1181,6 @@ body.is-menu-open {
 .equipment__media {
   position: relative;
   width: 100%;
-  padding-bottom: 24px;
 }
 
 .equipment__photo {
@@ -1204,54 +1199,16 @@ body.is-menu-open {
   object-position: center;
 }
 
-.equipment__badge {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 160px;
-  height: 160px;
-  background: #c1cc6c;
-  color: #1e1d22;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.equipment__badge-stat {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 800;
-  line-height: 40px;
-}
-
-.equipment__badge-text {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 12.5px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 @media (min-width: 960px) {
   .equipment {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
-    padding-top: 80px;
   }
 
   .equipment__copy {
-    padding-left: 34px;
+    padding-left: 0;
   }
 
   .equipment__specs li {
@@ -1263,19 +1220,10 @@ body.is-menu-open {
 
   .equipment__media {
     height: 500px;
-    padding-bottom: 0;
   }
 
   .equipment__photo {
     height: 100%;
-  }
-
-  .equipment__badge {
-    right: -16px;
-    bottom: -24px;
-    width: 192px;
-    height: 192px;
-    padding: 32px;
   }
 }
 
