@@ -5,7 +5,7 @@ window.BALEARBOL_CONFIG = {
   // Cloudflare Turnstile site key (Dashboard → Turnstile → your widget)
   turnstileSiteKey: "0x4AAAAAAFPinahvYgrtxa2m",
   // Instagram handle without @ — used for the Follow link
-  instagramUsername: "",
+  instagramUsername: "balearbol",
   instagramApiUrl: "/api/instagram",
   contactApiUrl: "/api/contact",
   maxFiles: 6,
