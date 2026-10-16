@@ -1865,6 +1865,13 @@ body.is-menu-open {
   font-weight: 400;
   line-height: 1.4;
   color: #d6d3d1;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.site-footer__location:hover {
+  opacity: 0.8;
+  color: #d6d3d1;
 }
 
 .site-footer__pin {
@@ -1899,6 +1906,7 @@ body.is-menu-open {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 
 .site-footer__heading {
@@ -1910,15 +1918,29 @@ body.is-menu-open {
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
 }
 
-.site-footer__contact p {
+a.site-footer__heading:hover {
+  opacity: 0.8;
+  color: #ffffff;
+}
+
+.site-footer__contact a:not(.site-footer__heading) {
   margin: 0;
   opacity: 0.8;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;
   line-height: 22.75px;
+  color: #d6d3d1;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.site-footer__contact a:not(.site-footer__heading):hover {
+  opacity: 1;
   color: #d6d3d1;
 }
 

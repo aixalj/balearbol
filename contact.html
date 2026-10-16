@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Work+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=78" />
+    <link rel="stylesheet" href="css/styles.css?v=80" />
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -380,7 +380,12 @@
               Tree surgery and care across Ibiza — safe work at height for
               homes, villas, and estates since 2024.
             </p>
-            <p class="site-footer__location">
+            <a
+              class="site-footer__location"
+              href="https://www.google.com/maps/search/?api=1&query=Ibiza%2C%20Balearic%20Islands%2C%20Spain"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 class="site-footer__pin"
                 src="assets/icons/pin.svg"
@@ -389,7 +394,7 @@
                 height="20"
               />
               <span>Ibiza, Balearics, Spain</span>
-            </p>
+            </a>
           </div>
 
           <nav class="site-footer__nav" aria-label="Footer">
@@ -399,13 +404,17 @@
             <a href="index.html#team">Team</a>
             <a href="index.html#safety">Safety</a>
             <a href="index.html#gallery">Gallery</a>
-            <a href="contact.html">Contact</a>
+            <a href="contact.html">Request a Quote</a>
           </nav>
 
           <div class="site-footer__contact">
-            <h3 class="site-footer__heading">Contact</h3>
-            <p>Email</p>
-            <p>Telf</p>
+            <a class="site-footer__heading" href="contact.html">Request a Quote</a>
+            <a data-contact-email href="mailto:balearbol@gmail.com">
+              <span data-contact-email-label>balearbol@gmail.com</span>
+            </a>
+            <a data-contact-phone href="tel:+34620059167">
+              <span data-contact-phone-label>+34620059167</span>
+            </a>
           </div>
         </div>
 
@@ -420,7 +429,7 @@
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <script src="js/config.js"></script>
-    <script src="js/main.js?v=40"></script>
+    <script src="js/main.js?v=41"></script>
     <script src="js/contact-form.js"></script>
   </body>
 </html>

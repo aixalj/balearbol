@@ -29,6 +29,27 @@
     });
   }
 
+  const contactEmail = String(config.contactEmail || "").trim();
+  if (contactEmail) {
+    document.querySelectorAll("[data-contact-email]").forEach((link) => {
+      link.href = `mailto:${contactEmail}`;
+    });
+    document.querySelectorAll("[data-contact-email-label]").forEach((label) => {
+      label.textContent = contactEmail;
+    });
+  }
+
+  const contactPhone = String(config.contactPhone || config.emergencyPhone || "").trim();
+  if (contactPhone) {
+    const telHref = `tel:${contactPhone.replace(/[^\d+]/g, "")}`;
+    document.querySelectorAll("[data-contact-phone]").forEach((link) => {
+      link.href = telHref;
+    });
+    document.querySelectorAll("[data-contact-phone-label]").forEach((label) => {
+      label.textContent = contactPhone;
+    });
+  }
+
   // Visual language switcher only — translations can hook into data-lang later
   header.querySelectorAll("[data-lang]").forEach((button) => {
     button.addEventListener("click", () => {

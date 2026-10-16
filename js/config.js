@@ -11,6 +11,9 @@ window.BALEARBOL_CONFIG = {
   facebookUrl: "https://www.facebook.com/people/BaleArbol/61567178275515/?locale=es_ES#",
   // Shown in the header top bar and contact emergency block
   emergencyPhone: "+34620059167",
+  // Footer contact details
+  contactEmail: "balearbol@gmail.com",
+  contactPhone: "+34620059167",
   contactApiUrl: "/api/contact",
   maxFiles: 6,
   maxFileBytes: 50 * 1024 * 1024,
