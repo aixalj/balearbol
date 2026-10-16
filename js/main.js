@@ -65,22 +65,81 @@
   const isOnePager = Boolean(document.getElementById("home"));
   const isContactPage = Boolean(document.querySelector(".contact-page"));
 
-  const setActiveFromHash = () => {
+  const setActiveSection = (sectionId) => {
     if (isContactPage || !isOnePager) {
       navLinks.forEach((link) => link.classList.remove("is-active"));
       return;
     }
 
-    const hash = window.location.hash || "#home";
+    const hash = `#${sectionId}`;
     navLinks.forEach((link) => {
       const href = link.getAttribute("href") || "";
       const linkHash = href.includes("#") ? `#${href.split("#")[1]}` : "";
       link.classList.toggle("is-active", linkHash === hash);
     });
+
+    if (sectionId && window.history.replaceState) {
+      const desiredHash = sectionId === "home" ? "" : hash;
+      if ((window.location.hash || "") !== desiredHash) {
+        window.history.replaceState(
+          null,
+          "",
+          desiredHash || `${window.location.pathname}${window.location.search}`
+        );
+      }
+    }
   };
 
-  window.addEventListener("hashchange", setActiveFromHash);
-  setActiveFromHash();
+  if (isOnePager && !isContactPage) {
+    const sectionIds = [
+      ...new Set(
+        [...navLinks]
+          .map((link) => {
+            const href = link.getAttribute("href") || "";
+            return href.includes("#") ? href.split("#")[1] : "";
+          })
+          .filter(Boolean)
+      ),
+    ];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const visible = new Set();
+
+    const pickActive = () => {
+      if (!visible.size) return;
+      // Prefer the topmost visible section in page order
+      const active = sectionIds.find((id) => visible.has(id));
+      if (active) setActiveSection(active);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        });
+        pickActive();
+      },
+      {
+        // Active when a section crosses the upper band of the viewport
+        root: null,
+        rootMargin: "-28% 0px -55% 0px",
+        threshold: [0, 0.25, 0.5, 1],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    // Initial highlight from hash or home
+    const initial =
+      (window.location.hash || "").replace(/^#/, "") || "home";
+    if (sectionIds.includes(initial)) setActiveSection(initial);
+    else setActiveSection("home");
+  } else {
+    navLinks.forEach((link) => link.classList.remove("is-active"));
+  }
 
   // Fixed nav: sit below topbar at page top; hide on scroll down, show on scroll up
   const sticky = header.querySelector(".site-header__sticky");
