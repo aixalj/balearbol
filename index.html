@@ -57,18 +57,27 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="css/styles.css?v=127" />
+    <link rel="stylesheet" href="css/styles.css?v=128" />
     <script>
-      /* Start hero video download ASAP (before body parses) */
+      /* Preload the right hero motion asset ASAP */
       (function () {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         var mobile = window.matchMedia("(max-width: 767px)").matches;
-        var src = mobile ? "assets/hero/hero-720.mp4" : "assets/hero/hero-1080.mp4";
-        window.__BALEARBOL_HERO_SRC = src;
+        /* Mobile: GIF loops without a user gesture (Instagram / iOS in-app browsers block <video>) */
+        if (mobile) {
+          window.__BALEARBOL_HERO_MOBILE = true;
+          var img = document.createElement("link");
+          img.rel = "preload";
+          img.as = "image";
+          img.href = "assets/hero/hero-mobile.gif";
+          document.head.appendChild(img);
+          return;
+        }
+        window.__BALEARBOL_HERO_SRC = "assets/hero/hero-1080.mp4";
         var link = document.createElement("link");
         link.rel = "preload";
         link.as = "video";
-        link.href = src;
+        link.href = window.__BALEARBOL_HERO_SRC;
         link.type = "video/mp4";
         document.head.appendChild(link);
       })();
@@ -314,7 +323,18 @@
 
     <main>
       <section class="hero" id="home" data-i18n-aria="aria.hero" aria-label="Introduction">
-        <div class="hero__media" aria-hidden="true">
+        <div class="hero__media" aria-hidden="true" data-hero-media>
+          <!-- Mobile: GIF autoplays/loops with no gesture (video is blocked in IG / many iOS webviews) -->
+          <img
+            class="hero__motion"
+            data-hero-motion
+            src="assets/hero/hero-mobile.gif"
+            alt=""
+            width="540"
+            height="304"
+            decoding="async"
+            fetchpriority="high"
+          />
           <video
             class="hero__video"
             data-hero-video
@@ -328,27 +348,27 @@
             preload="auto"
             aria-hidden="true"
           >
-            <source src="assets/hero/hero-720.mp4" type="video/mp4" media="(max-width: 767px)" />
-            <source src="assets/hero/hero-1080.mp4" type="video/mp4" />
+            <source src="assets/hero/hero-1080.mp4" type="video/mp4" media="(min-width: 768px)" />
           </video>
-          <!-- Covers the native iOS/Instagram play button until playback actually starts -->
           <div class="hero__poster" data-hero-poster></div>
           <div class="hero__gradient"></div>
         </div>
         <script>
-          /* Kick autoplay immediately — do not wait for main.js at page bottom */
+          /* Desktop: start muted video ASAP. Mobile uses the GIF above (no play() needed). */
           (function () {
-            var video = document.querySelector("[data-hero-video]");
-            if (!video) return;
+            var media = document.querySelector("[data-hero-media]");
+            if (!media) return;
             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-            var media = video.closest(".hero__media");
-            var src =
-              window.__BALEARBOL_HERO_SRC ||
-              (window.matchMedia("(max-width: 767px)").matches
-                ? "assets/hero/hero-720.mp4"
-                : "assets/hero/hero-1080.mp4");
+            if (window.matchMedia("(max-width: 767px)").matches || window.__BALEARBOL_HERO_MOBILE) {
+              media.classList.add("is-playing", "is-mobile-motion");
+              return;
+            }
 
+            var video = document.querySelector("[data-hero-video]");
+            if (!video) return;
+
+            var src = window.__BALEARBOL_HERO_SRC || "assets/hero/hero-1080.mp4";
             video.muted = true;
             video.defaultMuted = true;
             video.playsInline = true;
@@ -357,21 +377,16 @@
             video.setAttribute("muted", "");
             video.setAttribute("playsinline", "");
             video.setAttribute("webkit-playsinline", "");
-
-            if (video.getAttribute("src") !== src) {
-              video.src = src;
-            }
+            if (video.getAttribute("src") !== src) video.src = src;
 
             var markPlaying = function () {
-              if (media) media.classList.add("is-playing");
+              media.classList.add("is-playing");
             };
-
             var tryPlay = function () {
               var p = video.play();
               if (p && p.then) p.then(markPlaying).catch(function () {});
               else if (!video.paused) markPlaying();
             };
-
             video.addEventListener("playing", markPlaying);
             video.addEventListener("canplay", tryPlay);
             tryPlay();
@@ -718,7 +733,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/i18n.js?v=2"></script>
-    <script src="js/main.js?v=47"></script>
+    <script src="js/main.js?v=48"></script>
     <script src="js/services-carousel.js?v=4"></script>
     <script src="js/instagram-feed.js?v=49"></script>
   </body>

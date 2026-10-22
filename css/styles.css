@@ -1047,7 +1047,8 @@ body.is-menu-open {
 }
 
 .hero__image,
-.hero__video {
+.hero__video,
+.hero__motion {
   width: 100%;
   height: 100%;
   max-width: none;
@@ -1059,12 +1060,44 @@ body.is-menu-open {
   display: block;
   background: #1e1d22;
   pointer-events: none;
-  /* Keep video invisible until playing so iOS/Instagram play UI never shows */
+  /* Keep video invisible until playing so iOS play UI never shows */
   opacity: 0;
 }
 
 .hero__media.is-playing .hero__video {
   opacity: 1;
+}
+
+.hero__motion {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #1e1d22;
+}
+
+/* Mobile: GIF motion — starts immediately, no tap/scroll required */
+@media (max-width: 767px) {
+  .hero__video {
+    display: none !important;
+  }
+
+  .hero__motion {
+    display: block;
+  }
+
+  .hero__media.is-mobile-motion .hero__poster,
+  .hero__media.is-playing .hero__poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero__motion {
+    display: none !important;
+  }
 }
 
 .hero__poster {
@@ -1093,16 +1126,13 @@ body.is-menu-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__video {
-    display: none;
+  .hero__video,
+  .hero__motion {
+    display: none !important;
   }
 
   .hero__poster {
-    opacity: 1;
-  }
-
-  .hero__media.is-playing .hero__poster {
-    opacity: 1;
+    opacity: 1 !important;
   }
 }
 

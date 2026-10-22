@@ -201,73 +201,53 @@
     sticky.classList.remove("is-hidden");
   }
 
-  // Hero video: early inline boot handles first play; this only retries / swaps on resize
+  // Hero: mobile uses GIF (no gesture). Desktop muted video — retry play if needed.
   const heroVideo = document.querySelector("[data-hero-video]");
-  if (heroVideo) {
-    const heroMedia = heroVideo.closest(".hero__media");
+  const heroMedia = document.querySelector("[data-hero-media]");
+  if (heroMedia) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const pickSrc = () =>
-      window.matchMedia("(max-width: 767px)").matches
-        ? "assets/hero/hero-720.mp4"
-        : "assets/hero/hero-1080.mp4";
+    const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 
-    const setPlaying = (playing) => {
-      if (heroMedia) heroMedia.classList.toggle("is-playing", !!playing);
-    };
-
-    const tryPlay = () => {
-      if (reduceMotion.matches) return;
-      if (!heroVideo.paused) {
-        setPlaying(true);
-        return;
-      }
-      const playPromise = heroVideo.play();
-      if (playPromise && typeof playPromise.then === "function") {
-        playPromise.then(() => setPlaying(true)).catch(() => {});
-      }
-    };
-
-    heroVideo.addEventListener("playing", () => setPlaying(true));
-
-    const ensureSrc = (forceReload) => {
+    const applyMode = () => {
       if (reduceMotion.matches) {
-        heroVideo.removeAttribute("src");
-        heroVideo.load();
-        setPlaying(false);
+        heroMedia.classList.remove("is-playing", "is-mobile-motion");
+        if (heroVideo) {
+          heroVideo.removeAttribute("src");
+          heroVideo.load();
+        }
         return;
       }
-      const nextSrc = pickSrc();
-      if (forceReload || heroVideo.getAttribute("src") !== nextSrc) {
-        const wasPlaying = !heroVideo.paused;
-        heroVideo.src = nextSrc;
-        heroVideo.load();
-        if (wasPlaying || forceReload) {
-          heroVideo.addEventListener("canplay", tryPlay, { once: true });
+
+      if (isMobile()) {
+        heroMedia.classList.add("is-playing", "is-mobile-motion");
+        if (heroVideo) {
+          heroVideo.removeAttribute("src");
+          heroVideo.pause();
         }
+        return;
       }
-      tryPlay();
+
+      heroMedia.classList.remove("is-mobile-motion");
+      if (!heroVideo) return;
+
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.playsInline = true;
+      heroVideo.loop = true;
+      const src = "assets/hero/hero-1080.mp4";
+      if (heroVideo.getAttribute("src") !== src) {
+        heroVideo.src = src;
+        heroVideo.load();
+      }
+      const tryPlay = () => {
+        heroVideo.play().then(() => heroMedia.classList.add("is-playing")).catch(() => {});
+      };
+      if (heroVideo.readyState >= 2) tryPlay();
+      else heroVideo.addEventListener("canplay", tryPlay, { once: true });
     };
 
-    // In-app browsers (Instagram etc.) may block autoplay until a gesture
-    const unlockOnGesture = () => {
-      tryPlay();
-      if (!heroVideo.paused) {
-        document.removeEventListener("touchstart", unlockOnGesture, true);
-        document.removeEventListener("click", unlockOnGesture, true);
-        document.removeEventListener("scroll", unlockOnGesture, true);
-      }
-    };
-    document.addEventListener("touchstart", unlockOnGesture, { capture: true, passive: true });
-    document.addEventListener("click", unlockOnGesture, { capture: true });
-    document.addEventListener("scroll", unlockOnGesture, { capture: true, passive: true });
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") tryPlay();
-    });
-
-    // Do not reload if inline boot already started the correct source
-    ensureSrc(false);
-    reduceMotion.addEventListener("change", () => ensureSrc(true));
-    window.matchMedia("(max-width: 767px)").addEventListener("change", () => ensureSrc(true));
+    applyMode();
+    reduceMotion.addEventListener("change", applyMode);
+    window.matchMedia("(max-width: 767px)").addEventListener("change", applyMode);
   }
 })();
