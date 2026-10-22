@@ -1304,6 +1304,10 @@ body.is-menu-open {
   object-fit: cover;
 }
 
+.service-card__img--tree-surgery {
+  object-position: center 42%;
+}
+
 .service-card__body {
   display: flex;
   flex-direction: column;
