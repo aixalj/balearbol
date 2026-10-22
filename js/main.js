@@ -204,6 +204,7 @@
   // Hero background video: sharp encode + size-appropriate source
   const heroVideo = document.querySelector("[data-hero-video]");
   if (heroVideo) {
+    const heroMedia = heroVideo.closest(".hero__media");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const pickSrc = () =>
       window.matchMedia("(max-width: 767px)").matches
@@ -215,26 +216,44 @@
     heroVideo.defaultMuted = true;
     heroVideo.playsInline = true;
     heroVideo.loop = true;
+    heroVideo.controls = false;
+    heroVideo.removeAttribute("controls");
     heroVideo.setAttribute("muted", "");
     heroVideo.setAttribute("playsinline", "");
     heroVideo.setAttribute("webkit-playsinline", "");
 
+    const setPlaying = (playing) => {
+      if (heroMedia) heroMedia.classList.toggle("is-playing", playing);
+    };
+
     const tryPlay = () => {
-      if (reduceMotion.matches || heroVideo.paused === false) return;
+      if (reduceMotion.matches) return;
+      if (!heroVideo.paused && !heroVideo.ended) {
+        setPlaying(true);
+        return;
+      }
       const playPromise = heroVideo.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {});
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(() => setPlaying(true)).catch(() => setPlaying(false));
       }
     };
+
+    heroVideo.addEventListener("playing", () => setPlaying(true));
+    heroVideo.addEventListener("pause", () => {
+      // Keep poster cover if paused (e.g. tab background / failed autoplay)
+      if (heroVideo.paused) setPlaying(false);
+    });
 
     const startHeroVideo = () => {
       if (reduceMotion.matches) {
         heroVideo.removeAttribute("src");
         heroVideo.load();
+        setPlaying(false);
         return;
       }
       const nextSrc = pickSrc();
       if (heroVideo.getAttribute("src") !== nextSrc) {
+        setPlaying(false);
         heroVideo.src = nextSrc;
         heroVideo.load();
       }

@@ -57,7 +57,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="css/styles.css?v=125" />
+    <link rel="stylesheet" href="css/styles.css?v=126" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -310,10 +310,11 @@
             webkit-playsinline
             disablepictureinpicture
             disableremoteplayback
-            preload="metadata"
-            poster="assets/hero/hero-poster.jpg"
+            preload="auto"
             aria-hidden="true"
           ></video>
+          <!-- Covers the native iOS/Instagram play button until playback actually starts -->
+          <div class="hero__poster" data-hero-poster></div>
           <div class="hero__gradient"></div>
         </div>
 
@@ -657,7 +658,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/i18n.js?v=2"></script>
-    <script src="js/main.js?v=45"></script>
+    <script src="js/main.js?v=46"></script>
     <script src="js/services-carousel.js?v=4"></script>
     <script src="js/instagram-feed.js?v=49"></script>
   </body>

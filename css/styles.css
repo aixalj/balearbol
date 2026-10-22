@@ -1059,20 +1059,37 @@ body.is-menu-open {
   display: block;
   background: #1e1d22;
   pointer-events: none;
+  /* Keep video invisible until playing so iOS/Instagram play UI never shows */
+  opacity: 0;
+}
+
+.hero__media.is-playing .hero__video {
+  opacity: 1;
+}
+
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #1e1d22 url("../assets/hero/hero-poster.jpg") center / cover no-repeat;
+  transition: opacity 0.35s ease;
+}
+
+.hero__media.is-playing .hero__poster {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Hide native iOS / WebKit play overlay on background videos */
-.hero__video::-webkit-media-controls {
-  display: none !important;
-}
-
+.hero__video::-webkit-media-controls,
+.hero__video::-webkit-media-controls-enclosure,
+.hero__video::-webkit-media-controls-panel,
 .hero__video::-webkit-media-controls-start-playback-button {
   display: none !important;
-  -webkit-appearance: none;
-}
-
-.hero__video::-webkit-media-controls-enclosure {
-  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1080,17 +1097,19 @@ body.is-menu-open {
     display: none;
   }
 
-  .hero__media::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: #1e1d22 url("../assets/hero/hero-poster.jpg") center / cover no-repeat;
+  .hero__poster {
+    opacity: 1;
+  }
+
+  .hero__media.is-playing .hero__poster {
+    opacity: 1;
   }
 }
 
 .hero__gradient {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     67deg,
     rgb(95, 93, 99) 0%,
