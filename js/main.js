@@ -201,53 +201,61 @@
     sticky.classList.remove("is-hidden");
   }
 
-  // Hero: mobile uses GIF (no gesture). Desktop muted video — retry play if needed.
+  // Hero: full-quality muted video on all viewports; retry if autoplay was blocked
   const heroVideo = document.querySelector("[data-hero-video]");
   const heroMedia = document.querySelector("[data-hero-media]");
-  if (heroMedia) {
+  if (heroVideo && heroMedia) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+    const src = "assets/hero/hero-1080.mp4";
 
-    const applyMode = () => {
+    const tryPlay = () => {
+      if (reduceMotion.matches) return;
+      if (!heroVideo.paused) {
+        heroMedia.classList.add("is-playing");
+        return;
+      }
+      heroVideo.play().then(() => heroMedia.classList.add("is-playing")).catch(() => {});
+    };
+
+    const start = () => {
       if (reduceMotion.matches) {
-        heroMedia.classList.remove("is-playing", "is-mobile-motion");
-        if (heroVideo) {
-          heroVideo.removeAttribute("src");
-          heroVideo.load();
-        }
+        heroVideo.removeAttribute("src");
+        heroVideo.load();
+        heroMedia.classList.remove("is-playing");
         return;
       }
-
-      if (isMobile()) {
-        heroMedia.classList.add("is-playing", "is-mobile-motion");
-        if (heroVideo) {
-          heroVideo.removeAttribute("src");
-          heroVideo.pause();
-        }
-        return;
-      }
-
-      heroMedia.classList.remove("is-mobile-motion");
-      if (!heroVideo) return;
-
       heroVideo.muted = true;
       heroVideo.defaultMuted = true;
       heroVideo.playsInline = true;
       heroVideo.loop = true;
-      const src = "assets/hero/hero-1080.mp4";
+      heroVideo.controls = false;
       if (heroVideo.getAttribute("src") !== src) {
         heroVideo.src = src;
         heroVideo.load();
       }
-      const tryPlay = () => {
-        heroVideo.play().then(() => heroMedia.classList.add("is-playing")).catch(() => {});
-      };
-      if (heroVideo.readyState >= 2) tryPlay();
-      else heroVideo.addEventListener("canplay", tryPlay, { once: true });
+      tryPlay();
+      heroVideo.addEventListener("canplay", tryPlay, { once: true });
     };
 
-    applyMode();
-    reduceMotion.addEventListener("change", applyMode);
-    window.matchMedia("(max-width: 767px)").addEventListener("change", applyMode);
+    heroVideo.addEventListener("playing", () => heroMedia.classList.add("is-playing"));
+
+    // Fallback when the browser blocks autoplay until a gesture (Instagram / some iOS webviews)
+    const unlockOnGesture = () => {
+      tryPlay();
+      if (!heroVideo.paused) {
+        document.removeEventListener("touchstart", unlockOnGesture, true);
+        document.removeEventListener("click", unlockOnGesture, true);
+        document.removeEventListener("scroll", unlockOnGesture, true);
+      }
+    };
+    document.addEventListener("touchstart", unlockOnGesture, { capture: true, passive: true });
+    document.addEventListener("click", unlockOnGesture, { capture: true });
+    document.addEventListener("scroll", unlockOnGesture, { capture: true, passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") tryPlay();
+    });
+
+    start();
+    reduceMotion.addEventListener("change", start);
   }
 })();
