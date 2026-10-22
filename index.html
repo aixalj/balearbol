@@ -57,7 +57,22 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="css/styles.css?v=126" />
+    <link rel="stylesheet" href="css/styles.css?v=127" />
+    <script>
+      /* Start hero video download ASAP (before body parses) */
+      (function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var mobile = window.matchMedia("(max-width: 767px)").matches;
+        var src = mobile ? "assets/hero/hero-720.mp4" : "assets/hero/hero-1080.mp4";
+        window.__BALEARBOL_HERO_SRC = src;
+        var link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "video";
+        link.href = src;
+        link.type = "video/mp4";
+        document.head.appendChild(link);
+      })();
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -312,11 +327,56 @@
             disableremoteplayback
             preload="auto"
             aria-hidden="true"
-          ></video>
+          >
+            <source src="assets/hero/hero-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+            <source src="assets/hero/hero-1080.mp4" type="video/mp4" />
+          </video>
           <!-- Covers the native iOS/Instagram play button until playback actually starts -->
           <div class="hero__poster" data-hero-poster></div>
           <div class="hero__gradient"></div>
         </div>
+        <script>
+          /* Kick autoplay immediately — do not wait for main.js at page bottom */
+          (function () {
+            var video = document.querySelector("[data-hero-video]");
+            if (!video) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+            var media = video.closest(".hero__media");
+            var src =
+              window.__BALEARBOL_HERO_SRC ||
+              (window.matchMedia("(max-width: 767px)").matches
+                ? "assets/hero/hero-720.mp4"
+                : "assets/hero/hero-1080.mp4");
+
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.loop = true;
+            video.controls = false;
+            video.setAttribute("muted", "");
+            video.setAttribute("playsinline", "");
+            video.setAttribute("webkit-playsinline", "");
+
+            if (video.getAttribute("src") !== src) {
+              video.src = src;
+            }
+
+            var markPlaying = function () {
+              if (media) media.classList.add("is-playing");
+            };
+
+            var tryPlay = function () {
+              var p = video.play();
+              if (p && p.then) p.then(markPlaying).catch(function () {});
+              else if (!video.paused) markPlaying();
+            };
+
+            video.addEventListener("playing", markPlaying);
+            video.addEventListener("canplay", tryPlay);
+            tryPlay();
+          })();
+        </script>
 
         <div class="hero__slash" aria-hidden="true"></div>
 
@@ -658,7 +718,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/i18n.js?v=2"></script>
-    <script src="js/main.js?v=46"></script>
+    <script src="js/main.js?v=47"></script>
     <script src="js/services-carousel.js?v=4"></script>
     <script src="js/instagram-feed.js?v=49"></script>
   </body>

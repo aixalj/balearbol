@@ -201,7 +201,7 @@
     sticky.classList.remove("is-hidden");
   }
 
-  // Hero background video: sharp encode + size-appropriate source
+  // Hero video: early inline boot handles first play; this only retries / swaps on resize
   const heroVideo = document.querySelector("[data-hero-video]");
   if (heroVideo) {
     const heroMedia = heroVideo.closest(".hero__media");
@@ -211,40 +211,25 @@
         ? "assets/hero/hero-720.mp4"
         : "assets/hero/hero-1080.mp4";
 
-    // Required for iOS / Instagram in-app browsers — attribute alone is not enough
-    heroVideo.muted = true;
-    heroVideo.defaultMuted = true;
-    heroVideo.playsInline = true;
-    heroVideo.loop = true;
-    heroVideo.controls = false;
-    heroVideo.removeAttribute("controls");
-    heroVideo.setAttribute("muted", "");
-    heroVideo.setAttribute("playsinline", "");
-    heroVideo.setAttribute("webkit-playsinline", "");
-
     const setPlaying = (playing) => {
-      if (heroMedia) heroMedia.classList.toggle("is-playing", playing);
+      if (heroMedia) heroMedia.classList.toggle("is-playing", !!playing);
     };
 
     const tryPlay = () => {
       if (reduceMotion.matches) return;
-      if (!heroVideo.paused && !heroVideo.ended) {
+      if (!heroVideo.paused) {
         setPlaying(true);
         return;
       }
       const playPromise = heroVideo.play();
       if (playPromise && typeof playPromise.then === "function") {
-        playPromise.then(() => setPlaying(true)).catch(() => setPlaying(false));
+        playPromise.then(() => setPlaying(true)).catch(() => {});
       }
     };
 
     heroVideo.addEventListener("playing", () => setPlaying(true));
-    heroVideo.addEventListener("pause", () => {
-      // Keep poster cover if paused (e.g. tab background / failed autoplay)
-      if (heroVideo.paused) setPlaying(false);
-    });
 
-    const startHeroVideo = () => {
+    const ensureSrc = (forceReload) => {
       if (reduceMotion.matches) {
         heroVideo.removeAttribute("src");
         heroVideo.load();
@@ -252,16 +237,18 @@
         return;
       }
       const nextSrc = pickSrc();
-      if (heroVideo.getAttribute("src") !== nextSrc) {
-        setPlaying(false);
+      if (forceReload || heroVideo.getAttribute("src") !== nextSrc) {
+        const wasPlaying = !heroVideo.paused;
         heroVideo.src = nextSrc;
         heroVideo.load();
+        if (wasPlaying || forceReload) {
+          heroVideo.addEventListener("canplay", tryPlay, { once: true });
+        }
       }
-      if (heroVideo.readyState >= 2) tryPlay();
-      else heroVideo.addEventListener("loadeddata", tryPlay, { once: true });
+      tryPlay();
     };
 
-    // Some mobile / in-app browsers block autoplay until a gesture
+    // In-app browsers (Instagram etc.) may block autoplay until a gesture
     const unlockOnGesture = () => {
       tryPlay();
       if (!heroVideo.paused) {
@@ -278,8 +265,9 @@
       if (document.visibilityState === "visible") tryPlay();
     });
 
-    startHeroVideo();
-    reduceMotion.addEventListener("change", startHeroVideo);
-    window.matchMedia("(max-width: 767px)").addEventListener("change", startHeroVideo);
+    // Do not reload if inline boot already started the correct source
+    ensureSrc(false);
+    reduceMotion.addEventListener("change", () => ensureSrc(true));
+    window.matchMedia("(max-width: 767px)").addEventListener("change", () => ensureSrc(true));
   }
 })();
