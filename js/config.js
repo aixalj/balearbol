@@ -2,7 +2,7 @@ window.BALEARBOL_CONFIG = {
   // Public values only — never put Airtable, Turnstile, or Instagram secrets here.
   // Production origin used in SEO comments / future absolute links.
   // Keep in sync with canonicals, sitemap.xml, and robots.txt.
-  siteOrigin: "https://balearbol.com",
+  siteOrigin: "https://balearbol.es",
   cloudinaryCloudName: "vk9obsj0",
   cloudinaryUploadPreset: "balearbol_uploads",
   // Cloudflare Turnstile site key (Dashboard → Turnstile → your widget)

@@ -14,7 +14,7 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 Canonical URLs, Open Graph tags, `robots.txt`, and `sitemap.xml` assume:
 
-`https://balearbol.com`
+`https://balearbol.es`
 
 If the live domain differs, update that origin in:
 
