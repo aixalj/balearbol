@@ -884,6 +884,11 @@ button {
   object-position: center 28%;
 }
 
+.team-member__img--frank {
+  /* Keep Frank fully inside the circular crop */
+  object-position: 68% 48%;
+}
+
 .team-member__content {
   display: flex;
   flex-direction: column;
