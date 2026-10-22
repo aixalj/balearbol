@@ -880,6 +880,10 @@ button {
   display: block;
 }
 
+.team-member__img--james {
+  object-position: center 28%;
+}
+
 .team-member__content {
   display: flex;
   flex-direction: column;
