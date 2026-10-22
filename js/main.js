@@ -50,23 +50,16 @@
     });
   }
 
-  // Visual language switcher only — translations can hook into data-lang later
-  header.querySelectorAll("[data-lang]").forEach((button) => {
-    button.addEventListener("click", () => {
-      header.querySelectorAll("[data-lang]").forEach((other) => {
-        const active = other === button;
-        other.classList.toggle("is-active", active);
-        other.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-    });
-  });
+  const t = (key) =>
+    window.BALEARBOL_I18N?.t?.(key) ||
+    ({ "nav.openMenu": "Open menu", "nav.closeMenu": "Close menu" }[key] || key);
 
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
     document.body.classList.toggle("is-menu-open", open);
     if (toggle) {
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      toggle.setAttribute("aria-label", t(open ? "nav.closeMenu" : "nav.openMenu"));
     }
   };
 

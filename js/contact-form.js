@@ -3,6 +3,7 @@
   if (!form) return;
 
   const config = window.BALEARBOL_CONFIG || {};
+  const t = (key, vars) => window.BALEARBOL_I18N?.t?.(key, vars) || key;
   const fileInput = document.getElementById("contact-files");
   const trigger = form.querySelector("[data-upload-trigger]");
   const previews = form.querySelector("[data-upload-previews]");
@@ -110,15 +111,15 @@
 
     for (const file of incoming) {
       if (!file.type.startsWith("image/") && !/\.(heic|heif)$/i.test(file.name)) {
-        setStatus("Only image files are allowed (JPG, PNG, HEIC).", "error");
+        setStatus(t("contact.errImageOnly"), "error");
         continue;
       }
       if (file.size > maxBytes) {
-        setStatus(`${file.name} is over 50MB.`, "error");
+        setStatus(t("contact.errFileSize", { name: file.name }), "error");
         continue;
       }
       if (selectedFiles.length >= maxFiles) {
-        setStatus(`You can upload up to ${maxFiles} images.`, "error");
+        setStatus(t("contact.errMaxFiles", { n: maxFiles }), "error");
         break;
       }
       selectedFiles.push(file);
@@ -186,25 +187,25 @@
       .filter(Boolean);
 
     if (!services.length) {
-      setStatus("Please select at least one type of work.", "error");
+      setStatus(t("contact.errServices"), "error");
       serviceInputs[0]?.focus();
       return;
     }
 
     if (!selectedFiles.length) {
-      setStatus("Please upload at least one photo of the tree or site.", "error");
+      setStatus(t("contact.errPhotos"), "error");
       fileInput?.focus();
       return;
     }
 
     if (!config.turnstileSiteKey) {
-      setStatus("Captcha is not configured yet. Add your Turnstile site key.", "error");
+      setStatus(t("contact.errCaptchaConfig"), "error");
       return;
     }
 
     const turnstileToken = getTurnstileToken();
     if (!turnstileToken) {
-      setStatus("Please complete the captcha before submitting.", "error");
+      setStatus(t("contact.errCaptcha"), "error");
       return;
     }
 
@@ -220,7 +221,7 @@
     };
 
     submitBtn.disabled = true;
-    if (submitLabel) submitLabel.textContent = "Submitting…";
+    if (submitLabel) submitLabel.textContent = t("contact.submitting");
 
     try {
       payload.images = await Promise.all(selectedFiles.map(uploadToCloudinary));
@@ -234,7 +235,7 @@
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result.error || "Could not submit your request. Please try again.");
+        throw new Error(result.error || t("contact.errSubmit"));
       }
 
       form.reset();
@@ -242,16 +243,13 @@
       renderPreviews();
       syncServiceRequired();
       resetTurnstile();
-      setStatus(
-        "Thanks — we’ve got your request. We’ll take a look at the details and get back to you soon.",
-        "success"
-      );
+      setStatus(t("contact.success"), "success");
     } catch (error) {
       resetTurnstile();
-      setStatus(error.message || "Something went wrong.", "error");
+      setStatus(error.message || t("contact.errGeneric"), "error");
     } finally {
       submitBtn.disabled = false;
-      if (submitLabel) submitLabel.textContent = "Submit Request";
+      if (submitLabel) submitLabel.textContent = t("contact.submit");
     }
   });
 })();

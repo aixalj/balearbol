@@ -3,6 +3,7 @@
   if (!feed) return;
 
   const config = window.BALEARBOL_CONFIG || {};
+  const t = (key, vars) => window.BALEARBOL_I18N?.t?.(key, vars) || key;
   const username = String(config.instagramUsername || "").replace(/^@/, "").trim();
   const profileLinks = document.querySelectorAll("[data-instagram-profile]");
   const apiUrl = config.instagramApiUrl || "/api/instagram";
@@ -43,13 +44,23 @@
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
 
-    if (seconds < 60) return "just now";
-    if (minutes < 60) return minutes === 1 ? "a minute ago" : `${minutes} minutes ago`;
-    if (hours < 24) return hours === 1 ? "an hour ago" : `${hours} hours ago`;
-    if (days < 7) return days === 1 ? "a day ago" : `${days} days ago`;
-    if (weeks < 5) return weeks === 1 ? "a week ago" : `${weeks} weeks ago`;
-    if (months < 12) return months === 1 ? "a month ago" : `${months} months ago`;
-    return years === 1 ? "a year ago" : `${years} years ago`;
+    if (seconds < 60) return t("gallery.justNow");
+    if (minutes < 60) {
+      return minutes === 1 ? t("gallery.minuteAgo") : t("gallery.minutesAgo", { n: minutes });
+    }
+    if (hours < 24) {
+      return hours === 1 ? t("gallery.hourAgo") : t("gallery.hoursAgo", { n: hours });
+    }
+    if (days < 7) {
+      return days === 1 ? t("gallery.dayAgo") : t("gallery.daysAgo", { n: days });
+    }
+    if (weeks < 5) {
+      return weeks === 1 ? t("gallery.weekAgo") : t("gallery.weeksAgo", { n: weeks });
+    }
+    if (months < 12) {
+      return months === 1 ? t("gallery.monthAgo") : t("gallery.monthsAgo", { n: months });
+    }
+    return years === 1 ? t("gallery.yearAgo") : t("gallery.yearsAgo", { n: years });
   };
 
   const instagramIcon = `
@@ -72,11 +83,7 @@
 
   const renderPosts = (posts) => {
     if (!posts.length) {
-      setStatus(
-        username
-          ? `No posts yet. Follow @${username} on Instagram.`
-          : "No Instagram posts to show yet."
-      );
+      setStatus(t("gallery.empty"));
       return;
     }
 
@@ -189,19 +196,14 @@
   };
 
   const renderSetupHint = () => {
-    const handle = username ? `@${username}` : "your Instagram account";
     feed.innerHTML = `
       <div class="instagram-gallery__empty">
-        <p>
-          Connect ${handle} to show live posts here. Add
-          <code>INSTAGRAM_ACCESS_TOKEN</code> in Vercel, and set
-          <code>instagramUsername</code> in <code>js/config.js</code>.
-        </p>
+        <p>${t("gallery.unavailable")}</p>
         ${
           username
             ? `<a class="instagram-gallery__follow" href="https://www.instagram.com/${encodeURIComponent(
                 username
-              )}/" target="_blank" rel="noopener noreferrer">Open Instagram</a>`
+              )}/" target="_blank" rel="noopener noreferrer">Instagram</a>`
             : ""
         }
       </div>
@@ -216,7 +218,7 @@
         return;
       }
       if (!response.ok) {
-        throw new Error(data.error || "Could not load Instagram feed.");
+        throw new Error(data.error || t("gallery.error"));
       }
       const posts = (Array.isArray(data.posts) ? data.posts : [])
         .slice()
@@ -229,6 +231,6 @@
       renderPosts(posts);
     })
     .catch((error) => {
-      setStatus(error.message || "Could not load Instagram feed.");
+      setStatus(error.message || t("gallery.error"));
     });
 })();
