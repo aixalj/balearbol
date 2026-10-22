@@ -1308,6 +1308,10 @@ body.is-menu-open {
   object-position: center 62%;
 }
 
+.service-card__img--forestry {
+  object-position: center 45%;
+}
+
 .service-card__body {
   display: flex;
   flex-direction: column;
