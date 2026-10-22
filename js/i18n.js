@@ -61,7 +61,7 @@
         "Rapid response for fallen, hung-up, or wind-damaged trees — made safe quickly with controlled rigging and removal.",
 
       "team.title": "Meet Your Crew",
-      "team.role": "Founder & Lead Climber",
+      "team.role": "Co-Founder & Lead Climber",
 
       "certs.title": "Insured & Certified in the Balearics",
       "certs.lead":
@@ -217,7 +217,7 @@
         "Respuesta rápida a árboles caídos, enganchados o dañados por el viento — asegurados con rapidez mediante rigging y retirada controlada.",
 
       "team.title": "Conoce al equipo",
-      "team.role": "Fundador y trepador principal",
+      "team.role": "Cofundador y trepador principal",
 
       "certs.title": "Asegurados y certificados en Baleares",
       "certs.lead":
@@ -373,7 +373,7 @@
         "Schnelle Hilfe bei umgestürzten, hängenden oder windgeschädigten Bäumen — rasch gesichert mit kontrolliertem Rigging und Entfernung.",
 
       "team.title": "Dein Team",
-      "team.role": "Gründer & Lead Climber",
+      "team.role": "Mitgründer & Lead Climber",
 
       "certs.title": "Versichert & zertifiziert auf den Balearen",
       "certs.lead":
