@@ -506,7 +506,7 @@ button {
   height: 100%;
   object-fit: cover;
   /* Bias to lower part of portrait so James sits higher in the square frame */
-  object-position: center 72%;
+  object-position: center 88%;
   display: block;
 }
 
