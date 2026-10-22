@@ -885,8 +885,8 @@ button {
 }
 
 .team-member__img--frank {
-  /* Keep Frank fully inside the circular crop */
-  object-position: 68% 48%;
+  /* Center Frank in the circular crop */
+  object-position: center center;
 }
 
 .team-member__content {
