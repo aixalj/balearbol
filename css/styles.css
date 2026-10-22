@@ -613,10 +613,13 @@ button {
   text-transform: uppercase;
 }
 
-.about-certs__protocol img {
+.about-certs__protocol img,
+.about-certs__protocol-icon {
   flex-shrink: 0;
-  width: 24px;
-  height: 30px;
+  width: 1.35rem;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--brand-black);
 }
 
 .about-certs__carousel {
@@ -660,6 +663,13 @@ button {
   width: auto;
   height: auto;
   flex-shrink: 0;
+  font-size: 2rem;
+  line-height: 1;
+  color: #173124;
+}
+
+.cert-card--dark .cert-card__glyph {
+  color: var(--brand-green);
 }
 
 .cert-card__title {
