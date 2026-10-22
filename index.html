@@ -57,7 +57,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="css/styles.css?v=124" />
+    <link rel="stylesheet" href="css/styles.css?v=125" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -307,8 +307,12 @@
             muted
             loop
             playsinline
-            preload="none"
+            webkit-playsinline
+            disablepictureinpicture
+            disableremoteplayback
+            preload="metadata"
             poster="assets/hero/hero-poster.jpg"
+            aria-hidden="true"
           ></video>
           <div class="hero__gradient"></div>
         </div>
@@ -653,7 +657,7 @@
 
     <script src="js/config.js"></script>
     <script src="js/i18n.js?v=2"></script>
-    <script src="js/main.js?v=44"></script>
+    <script src="js/main.js?v=45"></script>
     <script src="js/services-carousel.js?v=4"></script>
     <script src="js/instagram-feed.js?v=49"></script>
   </body>

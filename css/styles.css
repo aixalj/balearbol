@@ -1058,6 +1058,21 @@ body.is-menu-open {
 .hero__video {
   display: block;
   background: #1e1d22;
+  pointer-events: none;
+}
+
+/* Hide native iOS / WebKit play overlay on background videos */
+.hero__video::-webkit-media-controls {
+  display: none !important;
+}
+
+.hero__video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+.hero__video::-webkit-media-controls-enclosure {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

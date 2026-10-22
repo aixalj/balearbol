@@ -210,6 +210,23 @@
         ? "assets/hero/hero-720.mp4"
         : "assets/hero/hero-1080.mp4";
 
+    // Required for iOS / Instagram in-app browsers — attribute alone is not enough
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.playsInline = true;
+    heroVideo.loop = true;
+    heroVideo.setAttribute("muted", "");
+    heroVideo.setAttribute("playsinline", "");
+    heroVideo.setAttribute("webkit-playsinline", "");
+
+    const tryPlay = () => {
+      if (reduceMotion.matches || heroVideo.paused === false) return;
+      const playPromise = heroVideo.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    };
+
     const startHeroVideo = () => {
       if (reduceMotion.matches) {
         heroVideo.removeAttribute("src");
@@ -217,15 +234,30 @@
         return;
       }
       const nextSrc = pickSrc();
-      if (heroVideo.getAttribute("src") === nextSrc) return;
-      heroVideo.src = nextSrc;
-      heroVideo.load();
-      const play = () => {
-        heroVideo.play().catch(() => {});
-      };
-      if (heroVideo.readyState >= 2) play();
-      else heroVideo.addEventListener("loadeddata", play, { once: true });
+      if (heroVideo.getAttribute("src") !== nextSrc) {
+        heroVideo.src = nextSrc;
+        heroVideo.load();
+      }
+      if (heroVideo.readyState >= 2) tryPlay();
+      else heroVideo.addEventListener("loadeddata", tryPlay, { once: true });
     };
+
+    // Some mobile / in-app browsers block autoplay until a gesture
+    const unlockOnGesture = () => {
+      tryPlay();
+      if (!heroVideo.paused) {
+        document.removeEventListener("touchstart", unlockOnGesture, true);
+        document.removeEventListener("click", unlockOnGesture, true);
+        document.removeEventListener("scroll", unlockOnGesture, true);
+      }
+    };
+    document.addEventListener("touchstart", unlockOnGesture, { capture: true, passive: true });
+    document.addEventListener("click", unlockOnGesture, { capture: true });
+    document.addEventListener("scroll", unlockOnGesture, { capture: true, passive: true });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") tryPlay();
+    });
 
     startHeroVideo();
     reduceMotion.addEventListener("change", startHeroVideo);
