@@ -1332,6 +1332,10 @@ body.is-menu-open {
   object-position: center 45%;
 }
 
+.service-card__img--fire-breaks {
+  object-position: center 48%;
+}
+
 .service-card__body {
   display: flex;
   flex-direction: column;
